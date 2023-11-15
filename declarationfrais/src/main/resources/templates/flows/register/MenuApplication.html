@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thyme leaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Compétences en ligne</title>
+</head>
+
+<body>
+    <br/>
+    <center>
+        <h2>Annuaire des compétences en ligne</h2>
+    </center>
+    <br/><br/>
+    <div align="center">
+        <a th:href="@${flowExecutionUrl} + '&_eventId=experts'}">
+            <h3>Les experts</h3>
+        </a><br/><br/>
+        <a th:href="@{ ${flowExecutionUrl} + '&_eventId=Themes'}">
+            <h3>Les thèmes</h3>
+        </a><br ><br/>
+        <a th:href="@ ${flowExecutionUrl} + '&_eventId=Competences'}">
+            <h3>Les compétences</h3>
+        </a><br/><br/><br/><br/>
+        <a th:href="@ ${flowExecutionUrl} + '&_eventId=quitter'}">
+            <h5>Quitter l'application</h5>
+        </a>
+    </div>
+</body>

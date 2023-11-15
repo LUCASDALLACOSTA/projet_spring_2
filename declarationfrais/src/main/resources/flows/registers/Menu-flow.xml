@@ -6,11 +6,11 @@
                         http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
     <view-state id="MenuPrincipal" view="flows/register/MenuApplication" redirect="false">
-        <transition on="experts" to="MenuExperts" />
+        <transition on="declaration" to="MenuDeclaration" />
         <transition on="Themes" to="MenuThemes" />
         <transition on="Competences" to="MenuCompetences" />
 
-        <view-state id="MenuExperts" view="flows/register/Gestion Experts">
+        <view-state id="MenuDeclaration" view="flows/register/declaration">
         </view-state>
         <view-state id="MenuThemes" view="flows/register/Gestion Themes">
         </view-state>

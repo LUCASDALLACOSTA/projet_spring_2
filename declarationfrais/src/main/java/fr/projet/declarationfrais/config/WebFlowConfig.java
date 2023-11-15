@@ -1,4 +1,4 @@
-package fr.projet.declarationfrais.repository.config;
+package fr.projet.declarationfrais.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
