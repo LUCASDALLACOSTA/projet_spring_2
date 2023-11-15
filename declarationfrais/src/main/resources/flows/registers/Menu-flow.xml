@@ -6,16 +6,14 @@
                         http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
     <view-state id="MenuPrincipal" view="flows/register/MenuApplication" redirect="false">
+        <transition on="connexion" to="MenuConnexion" />
         <transition on="declaration" to="MenuDeclaration" />
-        <transition on="Themes" to="MenuThemes" />
-        <transition on="Competences" to="MenuCompetences" />
 
+        <view-state id="MenuConnexion" view="flows/register/connexion">
+        </view-state>
         <view-state id="MenuDeclaration" view="flows/register/declaration">
         </view-state>
-        <view-state id="MenuThemes" view="flows/register/Gestion Themes">
-        </view-state>
-        <view-state id="MenuCompetences" view="flows/register/GestionCompetences">
-        </view-state>
+
         <end-state id="Sortie" view="flows/register/SortieApplication"/>
 
         <global-transitions>
