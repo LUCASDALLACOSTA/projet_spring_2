@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thyme leaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Point_d_entree</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
 </head>
 
 <body>
     <h1 th:text="${message}"></h1>
-    <h1>page d'accueil de l'application</h1>
+    <h1>Bienvenu sur la page d'accueil de l'application de déclaration de frais</h1>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <a th:href="@{/registers}">Commencer une nouvelle session</a>
+                <a th:href="@{/registers}" class="btn btn-primary">Commencer une nouvelle session</a>
             </div>
         </div>
     </div>

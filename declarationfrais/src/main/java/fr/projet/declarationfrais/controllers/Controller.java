@@ -21,7 +21,7 @@ public class Controller {
 	
 	@GetMapping("")
 	public String viewHomePage() {
-		return "index";
+		return "flows/index";
 	}
 
 	@GetMapping("/register")

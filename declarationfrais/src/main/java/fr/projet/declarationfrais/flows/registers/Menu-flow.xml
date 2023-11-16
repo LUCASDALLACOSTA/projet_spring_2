@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
 <flow xmlns="http://www.springframework.org/schema/webflow"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/webflow
-                        http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+            http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
     <view-state id="MenuPrincipal" view="flows/register/MenuApplication" redirect="false">
-        <transition on="connexion" to="MenuConnexion" />
         <transition on="declaration" to="MenuDeclaration" />
 
-        <view-state id="MenuConnexion" view="flows/register/connexion">
-        </view-state>
         <view-state id="MenuDeclaration" view="flows/register/declaration">
         </view-state>
 
@@ -18,6 +14,7 @@
 
         <global-transitions>
             <transition on="Menu" to="MenuPrincipal"/>
-            <tarnsition to="Sortie" />
+            <transition to="Sortie" />
         </global-transitions>
-    </flow>
+    </view-state>
+</flow>
