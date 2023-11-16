@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Comp�tences en ligne</title>
+</head>
+<body>
+<br/>
+<center><h2>Gestion des experts...</h2></center>
+<br/><br/>
+<div align="center">
+    <table border="0" width="80%">
+        <tr>
+            <td width="50%"><a th:href="@{ 'registers'}">Revenir au menu</a></td>
+            <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=Quitter'}"><h5>Quitter l'application</h5></a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
