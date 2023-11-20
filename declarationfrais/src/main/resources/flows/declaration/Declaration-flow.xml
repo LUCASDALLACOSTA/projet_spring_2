@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <view-state id="MenuDeclaration"
+                view="flows/declaration/MenuDeclaration" redirect="false">
+        <transition on="detailformation" to="DetailFormation"/>
+        <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraisrestauration" to="FraisRestauration"/>
+        <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
+        <transition on="transmission" to="Transmission"/>
+        <transition on="recapitulatif" to="Recapitulatif"/>
+    </view-state>
+
+    <view-state id="DetailFormation" view="flows/declaration/DetailFormation">
+    </view-state>
+    <view-state id="FraisTransport" view="flows/declaration/FraisTransport">
+    </view-state>
+    <view-state id="FraisRestauration" view="flows/declaration/FraisRestauration">
+    </view-state>
+    <view-state id="CoordonneesBancaires" view="flows/declaration/CoordonneesBancaires">
+    </view-state>
+    <view-state id="Transmission" view="flows/declaration/Transmission">
+    </view-state>
+    <view-state id="Recapitulatif" view="flows/declaration/Recapitulatif">
+    </view-state>
+
+    <global-transitions>
+        <transition on="Menu"
+                    to="MenuDeclaration"/>
+    </global-transitions>
+</flow>

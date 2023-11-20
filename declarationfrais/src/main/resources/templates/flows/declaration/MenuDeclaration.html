@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu de déclaration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a></li>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></li>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">Frais de restauration</a></li>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">Coordonnées bancaires</a></li>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">Transmission</a></li>
+            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">Récapitulatif</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

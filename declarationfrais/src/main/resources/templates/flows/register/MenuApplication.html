@@ -4,18 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <title>Competences en ligne</title>
+    <title>Menu des déclaration de frais</title>
 </head>
 <body>
 <br/>
 <center><h2>Menu des déclaration de frais</h2></center>
 <br/><br/>
 <div align="center">
-    <a th:href="@{ ${flowExecutionUrl} + '&_eventId=experts'}">
-    <h3>Les experts</h3></a><br/><br/>
-    <a th:href="@{ ${flowExecutionUrl} + '&_eventId Themes'}"><h3>Les themes</h3></a><br/><br/>
-    <a th:href="@{ ${flowExecutionUrl} + '&_eventId=Competences'}"><h3>Les competences</h3></a><br/><br/><br/><br/>
-    <a th:href="@{ ${flowExecutionUrl} + '&_eventId=quitter '}">
+    <a th:href="@{ ${flowExecutionUrl} + '&_eventId=creerdeclaration'}"><h3>Créer une déclaration</h3></a><br/><br/>
+    <a th:href="@{ ${flowExecutionUrl} + '&_eventId listedeclaration'}"><h3>Liste des déclarations</h3></a><br/><br/>
+    <a th:href="@{ ${flowExecutionUrl} + '&_eventId=Sortie'}">
         <h5>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Se déconnecter et quitter l'application" class="btn btn-danger" />
