@@ -40,3 +40,57 @@ a {
 a:hover {
     background-color: #004080;
 }
+
+.progress-bar {
+    list-style-type: none;
+    counter-reset: step;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 50px 0;
+}
+
+/* Styles pour chaque étape */
+.step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+/* Styles pour le numéro d'étape */
+.step .step-text {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin: 0 auto 10px;
+    line-height: 30px;
+}
+
+/* Styles pour l'étape en cours */
+.step.current .step-text {
+    border-color: red;
+    background-color: red;
+    color: white;
+}
+
+/* Styles pour l'étape complétée */
+.step.done .step-text {
+    border-color: green;
+    background-color: green;
+    color: white;
+}
+
+/* Styles pour la barre entre les étapes */
+.step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    height: 2px;
+    background-color: #ccc;
+    width: calc(100% - 50px);
+}
