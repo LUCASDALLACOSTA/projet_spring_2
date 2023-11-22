@@ -7,7 +7,7 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav>
+    <nav th:fragment="menu">
         <ul>
             <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a></li>
             <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></li>
