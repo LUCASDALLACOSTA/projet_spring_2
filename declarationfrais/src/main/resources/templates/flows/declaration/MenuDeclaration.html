@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Menu de déclaration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <title>Menu de déclaration</title>
 </head>
 <body>
     <nav th:fragment="menu">
+        <div class="shape"></div>
         <ul>
             <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a></li>
             <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></li>
