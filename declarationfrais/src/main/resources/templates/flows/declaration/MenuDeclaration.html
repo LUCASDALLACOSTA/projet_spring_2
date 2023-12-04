@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="../../includes/styles.css" rel="stylesheet">
     <title>Menu de déclaration</title>
 </head>
+
 <body>
     <nav th:fragment="menu">
-        <div class="shape"></div>
-        <ul>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a></li>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></li>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">Frais de restauration</a></li>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">Coordonnées bancaires</a></li>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">Transmission</a></li>
-            <li><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">Récapitulatif</a></li>
-            <li><a th:href="@{ 'registers'}">Revenir au menu</a></li>
-        </ul>
+        <div>
+            <h1>Votre déclaration de frais annexes</h1>
+            <h4>Ref Dossier: </h4>
+            <table width="100%" align="center">
+                <tr>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a>
+                    </td>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></td>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">Frais d'hébergement</a>
+                    </td>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">Frais de restauration</a>
+                    </td>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">Coordonnées
+                            bancaires</a></li>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">Transmission</a></td>
+                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">Récapitulatif</a></td>
+                    <td width="50%"><a th:href="@{ 'MenuApplication'}">Revenir au menu</a></td>
+                </tr>
+            </table>
+        </div>
     </nav>
 </body>
+
 </html>

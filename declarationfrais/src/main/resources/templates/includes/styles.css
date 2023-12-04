@@ -1,21 +1,16 @@
-/* styles.css */
-
-/* Body style */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4; /* Couleur de fond */
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
-/* Styles pour le titre h1 */
 h1 {
     color: red;
     text-align: center;
     margin-top: 50px;
 }
 
-/* Styles pour le lien */
 a {
     display: block;
     width: 200px;

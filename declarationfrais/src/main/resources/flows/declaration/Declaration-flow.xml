@@ -8,6 +8,7 @@
                 view="flows/declaration/MenuDeclaration" redirect="false">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -17,6 +18,7 @@
     <view-state id="DetailFormation" view="flows/declaration/DetailFormation">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -25,6 +27,16 @@
     <view-state id="FraisTransport" view="flows/declaration/FraisTransport">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
+        <transition on="fraisrestauration" to="FraisRestauration"/>
+        <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
+        <transition on="transmission" to="Transmission"/>
+        <transition on="recapitulatif" to="Recapitulatif"/>
+    </view-state>
+    <view-state id="FraisHebergement" view="flows/declaration/FraisHebergement">
+        <transition on="detailformation" to="DetailFormation"/>
+        <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -33,6 +45,7 @@
     <view-state id="FraisRestauration" view="flows/declaration/FraisRestauration">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -41,6 +54,7 @@
     <view-state id="CoordonneesBancaires" view="flows/declaration/CoordonneesBancaires">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -49,6 +63,7 @@
     <view-state id="Transmission" view="flows/declaration/Transmission">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
@@ -57,6 +72,7 @@
     <view-state id="Recapitulatif" view="flows/declaration/Recapitulatif">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
