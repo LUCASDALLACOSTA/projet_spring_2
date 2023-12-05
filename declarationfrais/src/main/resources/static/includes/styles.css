@@ -12,7 +12,8 @@ h1 {
 }
 
 h2 {
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-left: 130px;
 }
 
 .circle {
@@ -116,3 +117,25 @@ h2 {
     margin-right: 50px;
 }
 
+.hr-menu-flow {
+    border: none;
+    border-top: 5px solid lightgrey;
+    color: #333;
+    overflow: visible;
+    margin-top: -13px;
+    margin-left: 130px;
+    height: 5px;
+    width: 1650px;
+}
+
+
+hr {
+    border: none;
+    border-top: 3px solid black;
+    color: #333;
+    overflow: visible;
+    margin-top: -13px;
+    margin-left: 130px;
+    height: 5px;
+    width: 1650px;
+}

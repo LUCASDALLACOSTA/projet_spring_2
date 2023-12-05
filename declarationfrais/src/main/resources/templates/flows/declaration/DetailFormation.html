@@ -14,21 +14,49 @@
             <br>
             <h1>Votre déclaration de frais annexes</h1>
             <h4>Ref Dossier: </h4>
-            <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button" >Revenir au menu</a>
+            <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
             <br>
         </div>
         <div class="menu-container">
-            <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la formation</a></div>
-            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a></div>
-            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais d'hébergement</a></div>
-            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de restauration</a></div>
-            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées bancaires</a></div>
-            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
+            <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de
+                    la formation</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de
+                    transport</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
+                    d'hébergement</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
+                    restauration</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
+                    bancaires</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a>
+            </div>
             <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
             </div>
         </div>
+        <hr class="hr-menu-flow">
     </nav>
-    <h2>Detail Formation</h2>
+    <div style="background-color: rgb(212, 211, 211);">
+        <div>
+            <h2>Etape 1: Détails de la formation</h2>
+            <br>
+            <hr>
+        </div>
+        <form th:action="@{${flowExecutionUrl} + '&_eventId=fraistransport'}" method="post">
+            <div>
+                <label for="intitule">Intitulé:</label>
+                <input type="text" id="intitule" name="intitule">
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div>
+                <label for="lieu">Lieu:</label>
+                <input type="text" id="lieu" name="lieu">
+            </div>
+            <button type="submit">Etape suivante</button>
+        </form>
+    </div>
     </div>
 </body>
 

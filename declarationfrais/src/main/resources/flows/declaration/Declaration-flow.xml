@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-    <view-state id="MenuDeclaration"
-                view="flows/declaration/MenuDeclaration" redirect="false">
+    <view-state id="MenuDeclaration" view="flows/declaration/MenuDeclaration" redirect="false">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
         <transition on="fraishebergement" to="FraisHebergement"/>
@@ -17,13 +15,19 @@
 
     <view-state id="DetailFormation" view="flows/declaration/DetailFormation">
         <transition on="detailformation" to="DetailFormation"/>
-        <transition on="fraistransport" to="FraisTransport"/>
+        <transition on="fraistransport" to="FraisTransport">
+            <set name="flowScope.date" value="flowRequestContext.getRequestParameters().date" />
+            <set name="flowScope.lieu" value="flowRequestContext.getRequestParameters().lieu" />
+            <set name="flowScope.intitule" value="flowRequestContext.getRequestParameters().intitule" />
+        </transition>
+        <transition on="submitDetails" to="FraisTransport"/>
         <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
         <transition on="recapitulatif" to="Recapitulatif"/>
     </view-state>
+
     <view-state id="FraisTransport" view="flows/declaration/FraisTransport">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
@@ -80,7 +84,6 @@
     </view-state>
 
     <global-transitions>
-        <transition on="Menu"
-                    to="MenuDeclaration"/>
+        <transition on="Menu" to="MenuDeclaration"/>
     </global-transitions>
 </flow>

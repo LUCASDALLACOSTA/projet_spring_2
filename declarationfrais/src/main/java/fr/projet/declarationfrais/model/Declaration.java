@@ -37,7 +37,7 @@ public class Declaration {
     private String code_cb;
 
     @Column(nullable = false)
-    private String date_cb;
+    private Date date_cb;
 
     @Column(nullable = false)
     private String crypto_cb;
