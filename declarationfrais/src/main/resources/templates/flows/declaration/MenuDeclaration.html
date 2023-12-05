@@ -2,35 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../includes/styles.css" rel="stylesheet">
     <title>Menu de déclaration</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/includes/styles.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav th:fragment="menu">
-        <div>
+    <nav>
+        <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
+            <br>
             <h1>Votre déclaration de frais annexes</h1>
             <h4>Ref Dossier: </h4>
-            <table width="100%" align="center">
-                <tr>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">Détail de la formation</a>
-                    </td>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">Frais de transport</a></td>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">Frais d'hébergement</a>
-                    </td>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">Frais de restauration</a>
-                    </td>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">Coordonnées
-                            bancaires</a></li>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">Transmission</a></td>
-                    <td><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">Récapitulatif</a></td>
-                    <td width="50%"><a th:href="@{ 'MenuApplication'}">Revenir au menu</a></td>
-                </tr>
-            </table>
+            <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button" >Revenir au menu</a>
+            <br>
+        </div>
+        <div class="menu-container">
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la formation</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais d'hébergement</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de restauration</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées bancaires</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
+            <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
+            </div>
         </div>
     </nav>
+    <center><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}" class="btn btn-success success-button">Préparer votre déclaration</a></center>
 </body>
 
 </html>

@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Titre de la page</title>
-    <!-- Mettez ici vos liens CSS ou autres éléments head communs -->
+    <title>Frais de transport</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/includes/styles.css" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Inclure le fragment -->
-    <header th:include="flows/declaration/MenuDeclaration :: menu"></header>
-    
-    <!-- Votre contenu spécifique à cette page -->
-    <div class="content">
-        <h1>Frais transport</h1>
-        <!-- Votre contenu spécifique à cette page -->
+    <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
+        <br>
+        <h1>Votre déclaration de frais annexes</h1>
+        <h4>Ref Dossier: </h4>
+        <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
+        <br>
     </div>
+    <div class="menu-container">
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
+                formation</a></div>
+        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a>
+        </div>
+        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
+                d'hébergement</a></div>
+        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
+                restauration</a></div>
+        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
+                bancaires</a></div>
+        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
+        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
+        </div>
+    </div>
+    </nav>
+    <h2>Frais transport</h2>
 </body>
 
 </html>
