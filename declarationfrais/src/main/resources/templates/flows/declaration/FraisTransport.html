@@ -30,13 +30,13 @@
         <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
         </div>
     </div>
-    <hr>
+    <hr class="hr-menu-flow">
     </nav>
     <h2>Frais transport</h2>
     <div>
-        <p>Intitulé: <span th:text="${flowScope.intitule}"></span></p>
-        <p>Date: <span th:text="${flowScope.date}"></span></p>
-        <p>Lieu: <span th:text="${flowScope.lieu}"></span></p>
+        <p>Intitulé: <span th:text="${intitule}"></span></p>
+        <p>Date: <span th:text="${date}"></span></p>
+        <p>Lieu: <span th:text="${lieu}"></span></p>
     </div>
 </body>
 

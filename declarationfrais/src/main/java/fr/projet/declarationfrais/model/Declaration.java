@@ -34,13 +34,7 @@ public class Declaration {
     private String hebergement;
 
     @Column(nullable = false)
-    private String code_cb;
-
-    @Column(nullable = false)
-    private Date date_cb;
-
-    @Column(nullable = false)
-    private String crypto_cb;
+    private String iban;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
