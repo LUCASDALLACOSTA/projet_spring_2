@@ -10,33 +10,51 @@
 <body>
     <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
         <br>
-        <h1>Votre déclaration de frais annexes</h1>
+        <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>
         <h4>Ref Dossier: </h4>
         <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
         <br>
     </div>
     <div class="menu-container">
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=DetailFormation'}">1: Détail de la
                 formation</a></div>
-        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a>
+        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport'}">2: Frais de transport</a>
         </div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
-                d'hébergement</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
-                restauration</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
-                bancaires</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
+        <div class="circle">
+            <p>3: Frais d'hébergement</p>
         </div>
+        <div class="circle">
+            <p>4: Frais de restauration</p>
+        </div>
+        <div class="circle">
+            <p>5: Coordonnées bancaires</p>
+        </div>
+        <div class="circle">
+            <p>6: Transmission</p>
+        </div>
+        <div class="circle">
+            <p>7: Récapitulatif</p>
+        </div>
+    </div>
     </div>
     <hr class="hr-menu-flow">
     </nav>
-    <h2>Frais transport</h2>
-    <div>
-        <p>Intitulé: <span th:text="${intitule}"></span></p>
-        <p>Date: <span th:text="${date}"></span></p>
-        <p>Lieu: <span th:text="${lieu}"></span></p>
+    <div class="corps-page">
+        <div>
+            <br>
+            <h2 style="margin-top:20px;">Etape 2: Frais de transport</h2>
+            <br>
+            <hr>
+        </div>
+        <h3>Quel type de transport avez vous utilisé entre votre domicile et le lieu de formation ?</h3>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport2'}" method="post">
+            <input type="hidden" name="type_transport" value="Grande Lignes: Train, Avion, Ferry">
+            <button type="submit" class="btn btn-primary etape">Grandes lignes: Train, Avion, Ferry</button>
+        </form>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport2'}" method="post">
+            <input type="hidden" name="type_transport" value="Mon propre vehicule">
+            <button type="submit" class="btn btn-primary etape" style="padding-left: 105px; padding-right: 105px;">Mon propre véhicule</button>
+        </form>
     </div>
 </body>
 

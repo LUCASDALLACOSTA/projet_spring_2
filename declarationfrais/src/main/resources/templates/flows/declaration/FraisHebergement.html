@@ -18,21 +18,48 @@
     <div class="menu-container">
         <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
                 formation</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a>
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport'}">2: Frais de
+                transport</a>
         </div>
-        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
+        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisHebergement'}">3: Frais
                 d'hébergement</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
-                restauration</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
-                bancaires</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
+        <div class="circle">
+            <p>4: Frais de restauration</p>
+        </div>
+        <div class="circle">
+            <p>5: Coordonnées bancaires</p>
+        </div>
+        <div class="circle">
+            <p>6: Transmission</p>
+        </div>
+        <div class="circle">
+            <p>7: Récapitulatif</p>
         </div>
     </div>
-    <hr>
+    <hr class="hr-menu-flow">
     </nav>
-    <h2>Frais d'hébergement</h2>
+    <div class="corps-page" style="padding-bottom: 20px;">
+        <div>
+            <br>
+            <h2 style="margin-top:20px;">Etape 3: Frais d'hébergement</h2>
+            <br>
+            <hr>
+        </div>
+        <h3>Quel était votre mode d'hébergement ?</h3>
+        <br>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement">
+            <input type="hidden" name="type_transport" value="Derogation de mon CE">
+            <button type="submit" class="btn btn-primary btn-hebergement">Dérogation de mon CE:<br>J'ai obtenu une dérogation de mon Chef d'Etablissement pour rentrer chez moi le soir.</button>
+        </form>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement">
+            <input type="hidden" name="type_transport" value="Hebergement gratuit">
+            <button type="submit" class="btn btn-primary btn-hebergement" style="padding-right: 25px;">Hébergement gratuit:<br>Je n'ai eu aucune dérogation pour rentrer chez moi le soir ou je n'ai pas de justifictaif.</button>
+        </form>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport2'}" method="post">
+            <input type="hidden" name="type_transport" value="Hebergement payant">
+            <button type="submit" class="btn btn-primary btn-hebergement" style="padding-right: 200px;">Hébergement payant:<br>Je possède des justificatifs pour déclarer des frais d'hébergement</button>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Frais de transport 2</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/includes/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
+        <br>
+        <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>
+        <h4>Ref Dossier: </h4>
+        <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
+        <br>
+    </div>
+    <div class="menu-container">
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=DetailFormation'}">1: Détail de la
+                formation</a></div>
+        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport'}">2: Frais de
+                transport</a>
+        </div>
+        <div class="circle">
+            <p>3: Frais d'hébergement</p>
+        </div>
+        <div class="circle">
+            <p>4: Frais de restauration</p>
+        </div>
+        <div class="circle">
+            <p>5: Coordonnées bancaires</p>
+        </div>
+        <div class="circle">
+            <p>6: Transmission</p>
+        </div>
+        <div class="circle">
+            <p>7: Récapitulatif</p>
+        </div>
+    </div>
+    </div>
+    <hr class="hr-menu-flow">
+    </nav>
+    <div class="corps-page">
+        <div>
+            <br>
+            <h2 style="margin-top:20px;">Etape 2: Frais de transport</h2>
+            <br>
+            <hr>
+        </div>
+        <h3>Type de transport choisi : </h3>
+        <h4 style="color: rgb(75, 117, 255); margin-left: 130px;"><span th:text="${type_transport}"></span></h4>
+        <form th:action="@{${flowExecutionUrl} + '&_eventId=FraisTransport'}" method="post">
+            <button type="submit" class="btn btn-primary return-button">Modifier les informations</button>
+        </form>
+    </div>
+    <div class="corps-page">
+        <h3>Quel était votre lieu de départ ?</h3>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisHebergement'}" method="post">
+            <input type="radio" id="domicile" name="lieu_depart" value="Votre domicile">
+            <label for="domicile">Votre domicile</label><br>
+            <input type="radio" id="etablissement" name="lieu_depart" value="Votre etablissement scolaire">
+            <label for="etablissement">Votre établissement scolaire</label><br>
+    </div>
+    <div class="corps-page">
+        <h3>Téléverser la facture du transport</h3>
+        <input type="file" name="facture_transport" accept=".pdf, .doc, .docx">
+    </div>
+    <div class="corps-page">
+        <h3>Montant de la facture</h3>
+        <input type="text" id="montant_transport" name="montant_transport" th:value="${montant_transport}">
+    </div>
+    <center>
+        <button type="submit" class="btn btn-primary etape">Etape suivante</button>
+        </form>
+    </center>
+</body>
+
+</html>

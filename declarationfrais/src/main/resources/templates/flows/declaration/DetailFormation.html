@@ -12,13 +12,14 @@
     <nav>
         <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
             <br>
-            <h1>Votre déclaration de frais annexes</h1>  
+            <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>  
             <h4>Ref Dossier: </h4>
             <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
             <br>
         </div>
         <div class="menu-container">
-            <div class="circle-actuel"><p>1: Détail de la formation</p></div>
+            <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=DetailFormation'}">1: Détail de la
+                formation</a></div>
             <div class="circle"><p>2: Frais de transport</p></div>
             <div class="circle"><p>3: Frais d'hébergement</p></div>
             <div class="circle"><p>4: Frais de restauration</p></div>
@@ -28,16 +29,17 @@
         </div>
         <hr class="hr-menu-flow">
     </nav>
-    <div style="background-color: rgb(212, 211, 211);">
+    <div class="corps-page">
         <div>
-            <h2>Etape 1: Détails de la formation</h2>
+            <br>
+            <h2 style="margin-top:20px;">Etape 1: Détails de la formation</h2>
             <br>
             <hr>
         </div>
-            <form th:action="@{${flowExecutionUrl} + '&_eventId=fraistransport'}" method="post">
+            <form th:action="@{${flowExecutionUrl} + '&_eventId=FraisTransport'}" method="post">
                 <div>
                     <label for="intitule">Intitulé:</label>
-                    <input type="text" id="intitule" name="intitule" th:value="${intitule}">
+                    <input type="text" id="intitule" name="intitule" th:value="${intitule}" style="margin-left: 0px">
                 </div>
                 <div>
                     <label for="date">Date:</label>
@@ -45,9 +47,9 @@
             </div>
             <div>
                 <label for="lieu">Lieu:</label>
-                <input type="text" id="lieu" name="lieu" th:value="${lieu}">
+                <input type="text" id="lieu" name="lieu" th:value="${lieu}" style="margin-left: 0px;">
             </div>
-            <button type="submit" class="btn btn-primary">Etape suivante</button>
+            <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>
     </div>
     </div>

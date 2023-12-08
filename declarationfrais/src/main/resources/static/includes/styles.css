@@ -7,8 +7,11 @@ body {
 
 h1 {
     margin-top: 50px;
-    margin: 0;
-    padding: 0;
+    margin-left: 50px;
+}
+
+h4 {
+    margin-left: 30px;
 }
 
 h2 {
@@ -137,6 +140,7 @@ h2 {
 }
 
 .menu-container {
+    margin-top: 20px;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -181,3 +185,294 @@ hr {
     height: 5px;
     width: 1650px;
 }
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+h3 {
+    margin-left: 130px;
+}
+
+h2 {
+    margin-top: 50px;
+    margin-left: 130px;
+}
+
+.circle {
+    position: relative;
+    shape-outside: circle(50%);
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+    background-color: grey;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.circle a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.circle p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.circle-actuel {
+    position: relative;
+    shape-outside: circle(50%);
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+    background-color: red;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.circle-actuel a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.circle-actuel p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.circle-fini {
+    position: relative;
+    shape-outside: circle(50%);
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-right: 10px;
+    background-color: green;
+    border-radius: 50%;
+    margin-top: 8px;
+}
+
+.circle-fini a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.circle-fini p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-decoration: none;
+    width: 250px;
+    font-size: 20px;
+}
+
+.menu-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.return-button {
+    float: right;
+    margin-top: -70px;
+    font-size: 20px;
+    padding: 12px 20px;
+    margin-right: 40px;
+}
+
+.success-button {
+    font-size: 25px;
+    margin-top: 100px;
+    padding: 16px 25px;
+    margin-right: 50px;
+}
+
+.hr-menu-flow {
+    border: none;
+    border-top: 5px solid lightgrey;
+    color: #333;
+    overflow: visible;
+    margin-top: -13px;
+    margin-left: 130px;
+    height: 5px;
+    width: 1650px;
+}
+
+
+hr {
+    border: none;
+    border-top: 3px solid black;
+    color: #333;
+    overflow: visible;
+    margin-top: -13px;
+    margin-left: 130px;
+    height: 5px;
+    width: 1500px;
+}
+
+.corps-page {
+    background-color: rgb(230, 230, 230);
+    padding-bottom: 5px;
+    margin-top: 60px;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+}
+
+
+.corps-page h2 {
+    margin-top: 30px;
+}
+
+.corps-page form {
+    padding-left: 150px;
+    padding-right: 150px;
+
+}
+
+.corps-page form label {
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.corps-page form input[type="text"],
+.corps-page form input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.etape {
+    font-size: 24px;
+    padding: 15px 30px;
+    margin: 20px auto;
+    display: block;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]+label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left: 25px;
+    margin-right: 15px;
+}
+
+input[type="radio"]+label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #999;
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked+label:before {
+    background-color: rgb(75, 117, 255);
+}
+
+input[type="file"],
+input[type="text"] {
+    width: 90%;
+    margin-left: 130px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    border: 1px solid #ccc;
+}
+
+.btn-hebergement {
+    padding: 15px 20px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+  
+  .form-hebergement {
+    margin-bottom: 10px;
+  }
+  
+  .btn-hebergement br {
+    font-size: 14px;
+  }
+
+
