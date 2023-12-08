@@ -47,18 +47,30 @@
         </div>
         <h3>Quel était votre mode d'hébergement ?</h3>
         <br>
-        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement">
-            <input type="hidden" name="type_transport" value="Derogation de mon CE">
-            <button type="submit" class="btn btn-primary btn-hebergement">Dérogation de mon CE:<br>J'ai obtenu une dérogation de mon Chef d'Etablissement pour rentrer chez moi le soir.</button>
+        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement" id="form-hebergement">
+            <select name="type_transport" class="btn btn-primary btn-hebergement" id="type-transport">
+                <option value="Derogation de mon CE">Dérogation de mon CE: J'ai obtenu une dérogation de mon Chef d'Etablissement pour rentrer chez moi le soir.</option>
+                <option value="Hebergement gratuit">Hébergement gratuit: Je n'ai eu aucune dérogation pour rentrer chez moi le soir ou je n'ai pas de justificatif.</option>
+                <option value="Hebergement payant">Hébergement payant: Je possède des justificatifs pour déclarer des frais d'hébergement</option>
+            </select>
+            <div id="upload-field" style="display: none; margin-top: 10px; margin-left: -140px;">
+                <label for="file-upload" style="font-size: 25px; margin-left: 140px;">Téléverser la facture d'hébergement:</label>
+                <input type="file" name="facture_hebergement" accept=".pdf, .jpg, .png" style="margin-right: 20px;">
+            </div>            
+            <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>
-        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement">
-            <input type="hidden" name="type_transport" value="Hebergement gratuit">
-            <button type="submit" class="btn btn-primary btn-hebergement" style="padding-right: 25px;">Hébergement gratuit:<br>Je n'ai eu aucune dérogation pour rentrer chez moi le soir ou je n'ai pas de justifictaif.</button>
-        </form>
-        <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport2'}" method="post">
-            <input type="hidden" name="type_transport" value="Hebergement payant">
-            <button type="submit" class="btn btn-primary btn-hebergement" style="padding-right: 200px;">Hébergement payant:<br>Je possède des justificatifs pour déclarer des frais d'hébergement</button>
-        </form>
+        
+        <script>
+            document.getElementById('type-transport').addEventListener('change', function() {
+                var uploadField = document.getElementById('upload-field');
+                if (this.value === 'Hebergement payant') {
+                    uploadField.style.display = 'block';
+                } else {
+                    uploadField.style.display = 'none';
+                }
+            });
+        </script>
+        
     </div>
 </body>
 

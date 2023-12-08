@@ -453,10 +453,6 @@ input[type="text"] {
     margin-bottom: 20px;
 }
 
-input[type="file"] {
-    border: 1px solid #ccc;
-}
-
 .btn-hebergement {
     padding: 15px 20px;
     font-size: 20px;

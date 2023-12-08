@@ -43,7 +43,9 @@
         <transition on="DetailFormation" to="DetailFormation"/>
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
-        <transition on="FraisRestauration" to="FraisRestauration"/>
+        <transition on="FraisRestauration" to="FraisRestauration">
+            <set name="flowScope.facture_hebergement" value="flowRequestContext.getRequestParameters().facture_hebergement"/>
+        </transition>
     </view-state>
 
     <!-- FraisRestauration -->
@@ -65,7 +67,7 @@
         <transition on="transmission" to="Transmission"/>
         <transition on="recapitulatif" to="Recapitulatif"/>
     </view-state>
-    
+
     <view-state id="Transmission" view="flows/declaration/Transmission">
         <transition on="detailformation" to="DetailFormation"/>
         <transition on="fraistransport" to="FraisTransport"/>
