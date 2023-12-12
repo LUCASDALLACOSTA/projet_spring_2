@@ -18,22 +18,165 @@
     <div class="menu-container">
         <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
                 formation</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a>
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisTransport'}">2: Frais de
+                transport</a>
         </div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisHebergement'}">3: Frais
                 d'hébergement</a></div>
-        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
-                restauration</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
-                bancaires</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
-        <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
+        <div class="circle-actuel">
+            <a th:href="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}">4: Frais de restauration</a>
+        </div>
+        <div class="circle">
+            <p>5: Coordonnées bancaires</p>
+        </div>
+        <div class="circle">
+            <p>6: Transmission</p>
+        </div>
+        <div class="circle">
+            <p>7: Récapitulatif</p>
         </div>
     </div>
-    <hr>
+    <hr class="hr-menu-flow">
     </nav>
-    <h2>Frais de restauration</h2>
-    <h4 style="color: rgb(75, 117, 255); margin-left: 130px;"><span th:text="${facture_hebergement}"></span></h4>
+    <div class="corps-page" style="padding-bottom: 20px;">
+        <div>
+            <br>
+            <h2 style="margin-top:20px;">Etape 4: Frais de restauration</h2>
+            <br>
+            <hr>
+        </div>
+        <h3>Avez-vous des frais de restaurations ?</h3>
+        <br>
+        <form th:action="@{${flowExecutionUrl} + '&_eventId=CoordonneesBancaires'}" method="post"
+            class="form-restauration" id="form-restauration">
+            <select name="type_restauration" class="btn btn-restauration" id="type_restauration">
+                <option value="Aucun frais de restauration: Je n'ai aucun justificatif pour des frais de
+                restauration">Aucun frais de restauration: Je n'ai aucun justificatif pour des frais de
+                    restauration</option>
+                <option value="Frais declares">Déclarer des frais de restauration: J'ai des factures de restaurations
+                    à déclarer</option>
+            </select>
+            <br>
+
+            <div id="fichier_restauration" style="display: none; margin-top: 10px; background-color: white;">
+                <h3 style="margin-left: 20px;">Téléverser les frais de restaurations</h3>
+                <button type="button" onclick="ouvrirPopup()">Ajouter un frais de restauration</button>
+            </div>
+
+            <div id="liste_frais_resto" style="margin-top: 20px;">
+            </div>
+
+            <div id="popup"
+                style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: lightgray; padding: 20px; border: 2px solid black; max-width: 400px;">
+                <center>
+                    <h4>Date de la restauration</h4>
+                </center>
+                <input type="date" id="date_restauration" style="margin-bottom: 10px;"><br>
+                <center>
+                    <h4>Repas</h4>
+                </center>
+                <select id="repas" style="width: 100%; height: 50px;">
+                    <option value="petit-dejeuner">Petit-déjeuner</option>
+                    <option value="dejeuner">Déjeuner</option>
+                    <option value="diner">Dîner</option>
+                </select><br><br>
+                <center>
+                    <h4>Montant de la restauration</h4>
+                </center>
+                <input type="text" id="montant_restauration" style="margin-bottom: 10px; margin-left: 0px;"><br>
+                <center>
+                    <h4>Téléverser la facture justificative</h4>
+                </center>
+                <center><input type="file" id="facture_restauration" accept=".pdf, .jpg, .png"
+                        style="margin-bottom: 20px; margin-left: 0px;"><br></center>
+                <center>
+                    <button onclick="fermerPopup()" style="margin-right: 10px;">Fermer</button>
+                    <button onclick="validerRestauration()"
+                        style="background-color: green; color: white;">Valider</button>
+                </center>
+            </div>
+
+            <button type="submit" class="btn btn-primary etape">Etape suivante</button>
+        </form>
+
+        <!-- Script -->
+        <script>
+            document.getElementById('type_restauration').addEventListener('change', function () {
+                var uploadField = document.getElementById('fichier_restauration');
+                if (this.value === 'Frais declares') {
+                    uploadField.style.display = 'block';
+                } else {
+                    uploadField.style.display = 'none';
+                }
+            });
+        </script>
+
+        <script>
+            let fraisRestoCounter = 1;
+            const fraisRestoInfos = [];
+
+            function ouvrirPopup() {
+                document.getElementById("popup").style.display = "block";
+            }
+
+            function validerRestauration() {
+                var dateFraisResto = document.getElementById("date_restauration").value;
+                var repasFraisResto = document.getElementById("repas").value;
+                var montantFraisResto = document.getElementById("montant_restauration").value;
+                var factureRestauration = document.getElementById("facture_restauration").value;
+
+                document.getElementById("popup").style.display = "none";
+                fermerPopup();
+
+                const fraisResto = {
+                    date: dateFraisResto,
+                    repas: repasFraisResto,
+                    montant: montantFraisResto,
+                    facture: factureRestauration
+                };
+
+                fraisRestoInfos.push(fraisResto);
+
+                afficherFraisRestoInfos();
+
+                console.log("Données de fraisRestoInfos :", JSON.stringify(fraisRestoInfos));
+            }
+
+            function fermerPopup() {
+                document.getElementById("popup").style.display = "none";
+
+                document.getElementById("form-restauration").focus();
+
+                event.preventDefault();
+            }
+
+            function afficherFraisRestoInfos() {
+                const container = document.getElementById("liste_frais_resto");
+                container.innerHTML = "";
+
+                fraisRestoInfos.forEach((fraisResto, index) => {
+                    const divFraisResto = document.createElement("div");
+                    divFraisResto.innerHTML = `
+                <h5>Date du frais: ${fraisResto.date}</h5>
+                <h5>Repas: ${fraisResto.repas}</h5>
+                <h5>Montant: ${fraisResto.montant}</h5>
+                <h5>Facture: ${fraisResto.facture}</h5>
+                <div>
+                    <button onclick="supprimerFraisResto(${index})" style="background-color: red; color: white;">Supprimer</button>
+                </div>
+                <hr style="margin-top:10px; margin-left:0px;">
+            `;
+                    container.appendChild(divFraisResto);
+                });
+            }
+
+            function supprimerFraisResto(index) {
+                fraisRestoInfos.splice(index, 1);
+                afficherFraisRestoInfos();
+            }
+        </script>
+
+    </div>
 </body>
 
 </html>

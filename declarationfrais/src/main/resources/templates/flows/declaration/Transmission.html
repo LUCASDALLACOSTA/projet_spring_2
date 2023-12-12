@@ -18,7 +18,8 @@
     <div class="menu-container">
         <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
                 formation</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de transport</a>
+        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de
+                transport</a>
         </div>
         <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
                 d'hébergement</a></div>
@@ -26,13 +27,26 @@
                 restauration</a></div>
         <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
                 bancaires</a></div>
-        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a></div>
+        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a>
+        </div>
         <div class="circle"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=recapitulatif'}">7: Récapitulatif</a>
         </div>
     </div>
     <hr>
     </nav>
-    <h2>Transmission</h2>
+    <div class="corps-page">
+        <div>
+            <br>
+            <h2 style="margin-top:20px;">Récapitulatif avant la transmission</h2>
+            <br>
+            <hr>
+        </div>
+        <h3>Détails de la formation</h3>
+        <br>
+        <h4 style=" margin-left: 130px;">Intitulé: <span  style="color: rgb(75, 117, 255);" th:text="${intitule}"></span></h4>
+        <h4 style=" margin-left: 130px;">Date: <span style="color: rgb(75, 117, 255);" th:text="${date}"></span></h4>
+        <h4 style=" margin-left: 130px;">Lieu: <span style="color: rgb(75, 117, 255);" th:text="${lieu}"></span></h4>
+    </div>
 </body>
 
 </html>

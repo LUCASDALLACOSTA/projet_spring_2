@@ -44,7 +44,9 @@
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
         <transition on="FraisRestauration" to="FraisRestauration">
+            <set name="flowScope.type_hebergement" value="flowRequestContext.getRequestParameters().type_hebergement"/>
             <set name="flowScope.facture_hebergement" value="flowRequestContext.getRequestParameters().facture_hebergement"/>
+            <set name="flowScope.montant_hebergement" value="flowRequestContext.getRequestParameters().montant_hebergement"/>
         </transition>
     </view-state>
 
@@ -54,7 +56,10 @@
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
         <transition on="FraisRestauration" to="FraisRestauration"/>
-        <transition on="CoordonneesBancaires" to="CoordonneesBancaires"/>
+        <transition on="CoordonneesBancaires" to="CoordonneesBancaires">
+            <set name="flowScope.type_restauration" value="flowRequestContext.getRequestParameters().type_restauration"/>
+            <set name="flowScope.fraisRestoInfos" value="flowRequestContext.getRequestParameters().fraisRestoInfos"/>
+        </transition>
     </view-state>
 
     <!-- CoordonneesBancaires -->
@@ -64,8 +69,9 @@
         <transition on="fraishebergement" to="FraisHebergement"/>
         <transition on="fraisrestauration" to="FraisRestauration"/>
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
-        <transition on="transmission" to="Transmission"/>
-        <transition on="recapitulatif" to="Recapitulatif"/>
+        <transition on="transmission" to="Transmission">
+            <set name="flowScope.coordonneesbancaires" value="flowRequestContext.getRequestParameters().coordonneesbancaires"/>
+        </transition>
     </view-state>
 
     <view-state id="Transmission" view="flows/declaration/Transmission">

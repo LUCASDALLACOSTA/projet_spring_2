@@ -48,21 +48,24 @@
         <h3>Quel était votre mode d'hébergement ?</h3>
         <br>
         <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisRestauration'}" method="post" class="form-hebergement" id="form-hebergement">
-            <select name="type_transport" class="btn btn-primary btn-hebergement" id="type-transport">
+            <select name="type_hebergement" class="btn btn-hebergement" id="type_hebergement">
                 <option value="Derogation de mon CE">Dérogation de mon CE: J'ai obtenu une dérogation de mon Chef d'Etablissement pour rentrer chez moi le soir.</option>
                 <option value="Hebergement gratuit">Hébergement gratuit: Je n'ai eu aucune dérogation pour rentrer chez moi le soir ou je n'ai pas de justificatif.</option>
                 <option value="Hebergement payant">Hébergement payant: Je possède des justificatifs pour déclarer des frais d'hébergement</option>
             </select>
-            <div id="upload-field" style="display: none; margin-top: 10px; margin-left: -140px;">
+            
+            <div id="fichier_hebergement" style="display: none; margin-top: 10px; margin-left: -140px;">
                 <label for="file-upload" style="font-size: 25px; margin-left: 140px;">Téléverser la facture d'hébergement:</label>
                 <input type="file" name="facture_hebergement" accept=".pdf, .jpg, .png" style="margin-right: 20px;">
+                <h3>Montant de la facture</h3>
+                <input type="text" id="montant_hebergement" name="montant_hebergement" th:value="${montant_hebergement}">
             </div>            
             <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>
         
         <script>
-            document.getElementById('type-transport').addEventListener('change', function() {
-                var uploadField = document.getElementById('upload-field');
+            document.getElementById('type_hebergement').addEventListener('change', function() {
+                var uploadField = document.getElementById('fichier_hebergement');
                 if (this.value === 'Hebergement payant') {
                     uploadField.style.display = 'block';
                 } else {
