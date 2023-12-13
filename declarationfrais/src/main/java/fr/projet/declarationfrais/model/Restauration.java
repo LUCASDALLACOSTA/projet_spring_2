@@ -13,19 +13,16 @@ public class Restauration {
     private Long id;
 
     @Column(nullable = false)
-    private Date date;
+    private Date date_resto;
 
     @Column(nullable = false)
-    private Float montant;
+    private Float montant_resto;
 
-    @Column(name = "donnees_fichier", nullable = false)
-    private byte[] donnees_fichier;
+    @Column(name = "repas", nullable = false)
+    private String repas;
 
-    @Column(name = "nom_fichier", nullable = false)
-    private String nom_fichier;
-
-    @Column(name = "type_fichier", nullable = false)
-    private String type_fichier;
+    @Column(name = "nom_fichier_resto", nullable = false)
+    private String nom_fichier_resto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "declaration_id")

@@ -3,6 +3,7 @@ package fr.projet.declarationfrais.model;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -31,12 +32,30 @@ public class Declaration {
     private String intitule;
 
     @Column(nullable = false)
-    private String hebergement;
+    private String type_hebergement;
 
     @Column(nullable = false)
-    private String iban;
+    private Float montant_hebergement;
+
+    @Column(nullable = false)
+    private Float montant_transport;
+
+    @Column(nullable = false)
+    private String coordonneesbancaires;
+
+    @Column(nullable = false)
+    private String statut;
+
+    @Column(name = "nom_fichier_transport", nullable = false)
+    private String nom_fichier_transport;
+
+    @Column(name = "nom_fichier_hebergement", nullable = false)
+    private String nom_fichier_hebergement;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+    
+    @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
+    private List<Restauration> restaurationList;
 }

@@ -10,8 +10,8 @@
 <body>
     <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
         <br>
-        <h1>Votre déclaration de frais annexes</h1>
-        <h4>Ref Dossier: </h4>
+        <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>
+        <h4>Ref Dossier: <span th:text="${refDossier}"></span></h4>
         <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
         <br>
     </div>
@@ -61,6 +61,7 @@
                 th:text="${lieu_depart}"></span></h4>
         <h4 style=" margin-left: 130px;">Facture fournis pour le transport: <span style="color: rgb(75, 117, 255);"
                 th:text="${facture_transport}"></span></h4>
+        <a th:href="${'/download/facture_transport/' + facture_transport}" class="btn btn-primary">Télécharger</a>
         <h4 style=" margin-left: 130px;">Montant: <span style="color: rgb(75, 117, 255);"
                 th:text="${montant_transport}"></span></h4>
         <br>
@@ -70,10 +71,10 @@
         <br>
         <h4 style=" margin-left: 130px;">Type d'hébergement utilisé: <span style="color: rgb(75, 117, 255);"
                 th:text="${type_hebergement}"></span></h4>
-        <h4 style=" margin-left: 130px;">Facture fournis pour l'hébergement: <span style="color: rgb(75, 117, 255);"
-                th:text="${facture_hebergement}"></span></h4>
-        <h4 style=" margin-left: 130px;">Montant: <span style="color: rgb(75, 117, 255);"
-                th:text="${montant_hebergement}"></span></h4>
+        <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Facture fournis pour
+            l'hébergement: <span style="color: rgb(75, 117, 255);" th:text="${facture_hebergement}"></span></h4>
+        <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Montant: <span
+                style="color: rgb(75, 117, 255);" th:text="${montant_hebergement}"></span></h4>
         <br>
         <hr>
 
@@ -81,8 +82,8 @@
         <br>
         <h4 style=" margin-left: 130px;">Frais de restauration: <span style="color: rgb(75, 117, 255);"
                 th:text="${type_restauration}"></span></h4>
-        <h4 style=" margin-left: 130px;">Facture(s) fournis pour la restauration: <span
-                style="color: rgb(75, 117, 255);" th:text="${fraisRestoInfos}"></span></h4>
+        <h4 style=" margin-left: 130px;" th:if="${type_restauration == 'Frais declares'}">Facture(s) fournis pour la
+            restauration: <span style="color: rgb(75, 117, 255);" th:text="${fraisRestoInfos}"></span></h4>
         <br>
         <hr>
 
@@ -92,7 +93,14 @@
                 th:text="${coordonneesbancaires}"></span></h4>
         <br>
         <hr>
+        <center style="margin-top: -80px; margin-bottom: 40px;">
+            <form th:action="@{${flowExecutionUrl} + '&_eventId=recapitulatif'}" method="post">
+                <button type="submit" class="btn btn-success success-button">Confirmer et transmettre votre
+                    déclaration</button>
+            </form>
+        </center>
     </div>
+    <br>
 </body>
 
 </html>

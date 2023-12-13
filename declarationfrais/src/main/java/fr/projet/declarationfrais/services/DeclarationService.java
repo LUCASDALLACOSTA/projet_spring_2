@@ -1,25 +1,28 @@
 package fr.projet.declarationfrais.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.projet.declarationfrais.config.RandomRefGenerator;
 import fr.projet.declarationfrais.model.Declaration;
 import fr.projet.declarationfrais.repository.DeclarationRepository;
 
 @Service
 public class DeclarationService {
 
-    @Autowired
-    private DeclarationRepository declarationRepository;
+    private final DeclarationRepository declarationRepository;
 
     @Autowired
-    private RandomRefGenerator randomRefGenerator;
+    public DeclarationService(DeclarationRepository declarationRepository) {
+        this.declarationRepository = declarationRepository;
+    }
 
-    public Declaration createNewDeclaration(Declaration declaration) {
-        String randomRef = randomRefGenerator.generateRef();
-        declaration.setRefDossier(randomRef);
-        
-        return declarationRepository.save(declaration);
+    public void sauvegarderDeclaration(Declaration declaration) {
+        declarationRepository.save(declaration);
+    }
+
+    public List<Declaration> getAllDeclarations() {
+        return declarationRepository.findAll();
     }
 }
