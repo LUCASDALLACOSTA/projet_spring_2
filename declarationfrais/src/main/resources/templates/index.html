@@ -9,16 +9,18 @@
 </head>
 
 <body>
-    <h1 th:text="${message}"></h1>
-    <h1>Bienvenu sur la page d'accueil de l'application de déclaration de frais</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <a th:href="@{/MenuApplication}" class="btn btn-primary">Menu de l'application</a><br>
-                <a th:href="@{/login}" class="btn btn-primary">Commencer une nouvelle session</a><br>
-                <a th:href="@{/register}" class="btn btn-primary">S'enregistrer sur le site</a>
-            </div>
-        </div>
+    <div style="background-color: rgb(190, 190, 190); width: 100%; padding-bottom: 50px; padding: 8px 16px;">
+        <h1 th:text="${message}"></h1>
+        <h1>Bienvenu sur la page d'accueil de l'application de déclaration de frais</h1>
+    </div>
+    <div align="center">
+        <br>
+        <a th:href="@{/MenuApplication}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Menu de
+            l'application</a><br><br>
+        <a th:href="@{/login}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Commencer une
+            nouvelle session</a><br><br>
+        <a th:href="@{/register}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">S'enregistrer sur
+            le site</a></br>
     </div>
 </body>
 

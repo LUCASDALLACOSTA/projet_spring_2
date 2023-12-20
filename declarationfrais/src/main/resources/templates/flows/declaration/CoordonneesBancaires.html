@@ -41,21 +41,18 @@
         <h2>Coordonnées bancaires</h2>
         <div>
                 <p>Type de restauration choisi : <span th:text="${type_restauration}"></span></p>
-                <!-- Ajout pour afficher les détails des frais de restauration -->
-                <!-- CoordonneesBancaires.html -->
-                <!-- ... -->
+                <p>Type de restauration choisi : <span th:text="${repas}"></span></p>
                 <div>
-                        <!-- Vérifiez que fraisRestoInfos est correctement récupéré du modèle et affiché -->
+                        <!-- Ajout pour afficher les détails des frais de restauration -->
                         <h3>Informations sur les frais de restauration :</h3>
                         <div th:each="fraisResto : ${fraisRestoInfos}">
                                 <p>Date du frais: <span th:text="${fraisResto.date}"></span></p>
-                                <p>Repas: <span th:text="${fraisResto.repas}"></span></p>
+                                <p>Repas: <span th:text="${repas}"></span></p>
                                 <p>Montant: <span th:text="${fraisResto.montant}"></span></p>
                                 <p>Facture: <span th:text="${fraisResto.facture}"></span></p>
                                 <hr>
                         </div>
                 </div>
-                <!-- ... -->
 
         </div>
         <div class="corps-page">
@@ -69,11 +66,10 @@
                 <form th:action="@{ ${flowExecutionUrl} + '&_eventId=transmission'}" method="post">
                         <input type="text" id="coordonneesbancaires" name="coordonneesbancaires"
                                 th:value="${coordonneesbancaires}" style="margin-left: 0px;">
-
                         <center>
                                 <button type="submit" class="btn btn-primary etape">Etape suivante</button>
+                        </center>
                 </form>
-                </center>
         </div>
 
         <script>

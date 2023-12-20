@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="/includes/styles.css" rel="stylesheet">
     <title>Menu des déclaration de frais</title>
 </head>
+
 <body>
-<br/>
-<center><h1>Menu des déclaration de frais</h1></center>
-<br/><br/>
-<div align="center">
-    <a th:href="@{'/declaration'}"><h3>Créer une déclaration</h3></a><br/><br/>
-    <a th:href="@{'/ListeDeclaration'}"><h3>Liste des déclarations</h3></a><br/><br/>
-    <a th:href="@{'/'}">
-        <h5>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Se déconnecter et quitter l'application" class="btn btn-danger" />
-        </form>
-    </h5></a>
-</div>
+    <center>
+        <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
+            <br />
+            <h1>Menu des déclarations de frais</h1>
+            <br />
+        </div>
+    </center>
+    <br />
+
+    <div align="center">
+        <a th:href="@{'/declaration'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;"> Créer une déclaration</a><br /><br />
+        <a th:href="@{'/ListeDeclaration'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Liste des déclarations</a><br /><br />
+        <a th:href="@{'/'}">
+            <h5>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Se déconnecter et quitter l'application" class="btn btn-danger" />
+                </form>
+            </h5>
+        </a>
+    </div>
 </body>

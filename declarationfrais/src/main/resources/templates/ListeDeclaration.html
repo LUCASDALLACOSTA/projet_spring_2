@@ -17,7 +17,7 @@
         <thead>
             <tr>
                 <th>Référence Dossier</th>
-                <th>Statut</th>
+                <th>Statut actuel</th>
                 <th>Intitulé</th>
                 <th>Date</th>
                 <th>Lieu</th>
@@ -30,12 +30,14 @@
                 <th>Facture Hébergement</th>
                 <th>Coordonnées Bancaires</th>
                 <th>Restaurations</th>
+                <th>Montant Total</th>
+                <th>Nouveau statut</th> 
             </tr>
         </thead>
         <tbody>
-            <tr th:each="declaration : ${listOfDeclarations}">
+            <tr th:each="declaration : ${listeDeclarations}">
                 <td th:text="${declaration.refDossier}"></td>
-                <td><span>Statut actuel:</span><br><span th:text="${declaration.statut}"></span></td> 
+                <td><br><span th:text="${declaration.statut}"></span></td> 
                 <td th:text="${declaration.intitule}"></td>
                 <td th:text="${#dates.format(declaration.date, 'dd-MM-yyyy')}"></td>
                 <td th:text="${declaration.lieu}"></td>
@@ -47,7 +49,6 @@
                 <td th:text="${declaration.montant_hebergement} + ' €'"></td>
                 <td th:text="${declaration.nom_fichier_hebergement}"></td>
                 <td th:text="${declaration.coordonneesbancaires}"></td>       
-
                 <td>
                     <table border="1">
                         <thead>
@@ -68,6 +69,20 @@
                         </tbody>
                     </table>
                 </td>
+                <td>
+                    <!-- <span th:text="${#numbers.formatDecimal(calculerMontantTotal(declaration), 2, 'COMMA', 'POINT')} + ' €'"></span>-->
+                </td>                                        
+                <td>
+                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                        <button type="submit" style="background-color: green;" name="statut" value="Valide">Valide</button>
+                    </form>
+                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                        <button type="submit" style="background-color: red;" name="statut" value="Invalide">Invalide</button>
+                    </form>
+                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                        <button type="submit" style="background-color: yellow;" name="statut" value="En attente">En attente</button>
+                    </form>
+                </td>   
             </tr>
         </tbody>
     </table>

@@ -25,4 +25,8 @@ public class DeclarationService {
     public List<Declaration> getAllDeclarations() {
         return declarationRepository.findAll();
     }
+
+    public Declaration getDeclarationById(Long id) {
+        return declarationRepository.findById(id).orElse(null);
+    }
 }
