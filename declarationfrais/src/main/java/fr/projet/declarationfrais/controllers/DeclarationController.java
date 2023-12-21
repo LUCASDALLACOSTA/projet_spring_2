@@ -36,26 +36,31 @@ public class DeclarationController {
         return "redirect:/confirmation";
     }
 
-    @GetMapping("/ListeDeclaration")
-    public String listeDeclaration(Model model) {
-        List<Declaration> listeDeclarations = declarationService.getAllDeclarations();
+    @GetMapping("/ListeDeclarations")
+    public String getListeDeclarations(@RequestParam(value = "statut", required = false) String statut, Model model) {
+        List<Declaration> declarations;
 
-        model.addAttribute("listeDeclarations", listeDeclarations);
+        if (statut != null && !statut.isEmpty()) {
+            declarations = declarationService.getDeclarationsByStatut(statut);
+        } else {
+            declarations = declarationService.getAllDeclarations();
+        }
 
-        return "ListeDeclaration";
+        model.addAttribute("listeDeclarations", declarations);
+        return "listeDeclarations";
     }
 
     public float calculerMontantTotal(Declaration declaration) {
         float montantTotal = 0;
-    
+
         if (declaration.getMontant_transport() != null) {
             montantTotal += declaration.getMontant_transport();
         }
-    
+
         if (declaration.getMontant_hebergement() != null) {
             montantTotal += declaration.getMontant_hebergement();
         }
-    
+
         if (declaration.getRestaurationList() != null) {
             for (Restauration restauration : declaration.getRestaurationList()) {
                 if (restauration.getMontant_resto() != null) {
@@ -63,23 +68,27 @@ public class DeclarationController {
                 }
             }
         }
-    
+
         return montantTotal;
     }
-    
 
     @PostMapping("/updateStatut/{id}")
     public String updateStatut(@PathVariable Long id, @RequestParam("statut") String statut) {
-        // Récupérez la déclaration à partir de l'ID
         Declaration declaration = declarationService.getDeclarationById(id);
-
-        // Mettez à jour le statut
         declaration.setStatut(statut);
-
-        // Sauvegardez la déclaration mise à jour
         declarationService.sauvegarderDeclaration(declaration);
 
-        return "redirect:/ListeDeclaration"; // Redirigez vers la liste des déclarations après la modification
+        String redirectURL = "/ListeDeclarations";
+
+        if (statut.equalsIgnoreCase("Valide")) {
+            redirectURL += "?statut=Valide";
+        } else if (statut.equalsIgnoreCase("Invalide")) {
+            redirectURL += "?statut=Invalide";
+        } else if (statut.equalsIgnoreCase("En attente")) {
+            redirectURL += "?statut=En%20attente";
+        }
+
+        return "redirect:" + redirectURL;
     }
 
 }

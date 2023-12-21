@@ -464,17 +464,17 @@ input[type="text"] {
     background-color: white;
     color: black;
     border-color: black;
-  }
-  
-  .form-hebergement {
-    margin-bottom: 10px;
-  }
-  
-  .btn-hebergement br {
-    font-size: 14px;
-  }
+}
 
-  .btn-restauration {
+.form-hebergement {
+    margin-bottom: 10px;
+}
+
+.btn-hebergement br {
+    font-size: 14px;
+}
+
+.btn-restauration {
     padding: 15px 20px;
     font-size: 20px;
     display: flex;
@@ -485,12 +485,32 @@ input[type="text"] {
     background-color: white;
     color: black;
     border-color: black;
-  }
-  
-  .form-restauration {
+}
+
+.form-restauration {
     margin-bottom: 10px;
-  }
-  
-  .btn-restauration br {
+}
+
+.btn-restauration br {
     font-size: 14px;
-  }
+}
+
+.label {
+    padding: 5px 10px;
+    border-radius: 3px;
+    color: white;
+}
+
+.valide {
+    background-color: green;
+    color: white;
+}
+
+.invalide {
+    background-color: red;
+    color: white;
+}
+
+.attente {
+    background-color: yellow;
+}

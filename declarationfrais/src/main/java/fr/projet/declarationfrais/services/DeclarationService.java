@@ -1,5 +1,6 @@
 package fr.projet.declarationfrais.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,18 @@ public class DeclarationService {
     public Declaration getDeclarationById(Long id) {
         return declarationRepository.findById(id).orElse(null);
     }
+
+    public List<Declaration> getDeclarationsByStatut(String statut) {
+    List<Declaration> allDeclarations = declarationRepository.findAll(); 
+
+    List<Declaration> declarationsByStatut = new ArrayList<>();
+    for (Declaration declaration : allDeclarations) {
+        if (declaration.getStatut().equalsIgnoreCase(statut)) {
+            declarationsByStatut.add(declaration);
+        }
+    }
+
+    return declarationsByStatut;
+}
+
 }
