@@ -24,5 +24,5 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
-    private boolean admin;
+    private int role;
 }

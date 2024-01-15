@@ -37,6 +37,7 @@ public class Controller {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodedPassword);
 		logger.info(user.toString());
+		user.setRole(0);
 		userRepo.save(user);
 		
 		return "register_success";

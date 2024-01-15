@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/includes/styles.css" rel="stylesheet">
-    <title>Menu des déclaration de frais</title>
+    <title>Menu des déclarations de frais</title>
 </head>
 
 <body>
@@ -19,8 +19,16 @@
     <br />
 
     <div align="center">
-        <a th:href="@{'/declaration'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;"> Créer une déclaration</a><br /><br />
-        <a th:href="@{'/ListeDeclarations'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Liste des déclarations</a><br /><br />
+        <th:block th:if="${#request.isUserInRole('ROLE_0')}">
+            <!-- Si l'utilisateur est user -->
+            <a th:href="@{'/declaration'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;"> Créer une déclaration</a><br /><br />
+            <a th:href="@{'/ListeDeclarations'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Liste de mes déclarations</a><br /><br />
+        </th:block>
+        <th:block th:if="${#request.isUserInRole('ROLE_1')}">
+            <!-- Si l'utilisateur est admin -->
+            <a th:href="@{'/ListeDeclarations'}" class="btn btn-primary" style="font-size: 25px; padding: 15px 20px;">Liste des déclarations</a><br /><br />
+        </th:block>
+
         <a th:href="@{'/'}">
             <h5>
                 <form th:action="@{/logout}" method="post">
@@ -30,3 +38,4 @@
         </a>
     </div>
 </body>
+</html>
