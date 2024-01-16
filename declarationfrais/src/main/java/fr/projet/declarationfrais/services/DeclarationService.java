@@ -32,16 +32,15 @@ public class DeclarationService {
     }
 
     public List<Declaration> getDeclarationsByStatut(String statut) {
-    List<Declaration> allDeclarations = declarationRepository.findAll(); 
+        List<Declaration> allDeclarations = declarationRepository.findAll();
 
-    List<Declaration> declarationsByStatut = new ArrayList<>();
-    for (Declaration declaration : allDeclarations) {
-        if (declaration.getStatut().equalsIgnoreCase(statut)) {
-            declarationsByStatut.add(declaration);
+        List<Declaration> declarationsByStatut = new ArrayList<>();
+        for (Declaration declaration : allDeclarations) {
+            if (declaration.getStatut().equalsIgnoreCase(statut)) {
+                declarationsByStatut.add(declaration);
+            }
         }
+
+        return declarationsByStatut;
     }
-
-    return declarationsByStatut;
-}
-
 }

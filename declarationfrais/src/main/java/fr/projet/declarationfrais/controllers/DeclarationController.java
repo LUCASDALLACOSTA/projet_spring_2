@@ -27,15 +27,6 @@ public class DeclarationController {
         this.declarationService = declarationService;
     }
 
-    @PostMapping("/recapitulatif")
-    public String saveDeclaration(RequestContext requestContext) {
-        Declaration declaration = (Declaration) requestContext.getFlowScope().get("declaration");
-
-        declarationService.sauvegarderDeclaration(declaration);
-
-        return "redirect:/confirmation";
-    }
-
     @GetMapping("/ListeDeclarations")
     public String getListeDeclarations(@RequestParam(value = "statut", required = false) String statut, Model model) {
         List<Declaration> declarations;
@@ -91,4 +82,10 @@ public class DeclarationController {
         return "redirect:" + redirectURL;
     }
 
+    @PostMapping("/transmission")
+    public String sauvegarderDeclaration(RequestContext requestContext) {
+        Declaration declaration = (Declaration) requestContext.getFlowScope().get("declaration");
+        declarationService.sauvegarderDeclaration(declaration);
+        return "@{${flowExecutionUrl} + '&_eventId=recapitulatif'}";
+    }
 }

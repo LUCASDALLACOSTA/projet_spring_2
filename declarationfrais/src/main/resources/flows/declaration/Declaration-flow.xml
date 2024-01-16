@@ -90,6 +90,7 @@
         <transition on="recapitulatif" to="Recapitulatif">
             <evaluate expression="declarationService.sauvegarderDeclaration(declaration)" />
         </transition>
+
     </view-state>
 
     <!-- Recapitulatif -->
