@@ -23,7 +23,7 @@ public class Declaration {
     private String lieuDepart;
 
     @Column(nullable = false)
-    private Date date;
+    private String date;
 
     @Column(nullable = false)
     private String lieu;
@@ -35,10 +35,10 @@ public class Declaration {
     private String type_hebergement;
 
     @Column(nullable = false)
-    private Float montant_hebergement;
+    private String montant_hebergement;
 
     @Column(nullable = false)
-    private Float montant_transport;
+    private String montant_transport;
 
     @Column(nullable = false)
     private String coordonneesbancaires;
@@ -54,8 +54,9 @@ public class Declaration {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private String user;
     
     @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
     private List<Restauration> restaurationList;
+
 }
