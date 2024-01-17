@@ -23,7 +23,7 @@ public class Declaration {
     private String lieuDepart;
 
     @Column(nullable = false)
-    private Date date;
+    private String date;
 
     @Column(nullable = false)
     private String lieu;

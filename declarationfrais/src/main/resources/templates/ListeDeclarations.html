@@ -54,7 +54,7 @@
                 </td>
                 <td th:text="${declaration.user.lastName + ' ' + declaration.user.FirstName}"></td>
                 <td th:text="${declaration.intitule}"></td>
-                <td th:text="${#dates.format(declaration.date, 'dd-MM-yyyy')}"></td>
+                <td th:text="${#strings.substring(declaration.date, 0, 10)}"></td>
                 <td th:text="${declaration.lieu}"></td>
                 <td th:text="${declaration.typeTransport}"></td>
                 <td th:text="${declaration.lieuDepart}"></td>
