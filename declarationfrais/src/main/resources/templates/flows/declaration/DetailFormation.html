@@ -39,15 +39,19 @@
             <form th:action="@{${flowExecutionUrl} + '&_eventId=FraisTransport'}" method="post">
                 <div>
                     <label for="intitule">Intitulé:</label>
-                    <input type="text" id="intitule" name="intitule" th:value="${intitule}" style="margin-left: 0px">
+                    <input type="text" id="intitule" name="intitule" th:value="${intitule}" style="margin-left: 0px" required>
                 </div>
                 <div>
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" th:value="${date}">
-            </div>
+                    <input type="date" id="date" name="date" th:value="${date}" required>
+                    <script>
+                        var today = new Date().toISOString().split('T')[0];
+                        document.getElementById('date').setAttribute('max', today);
+                    </script>
+                </div>                
             <div>
                 <label for="lieu">Lieu:</label>
-                <input type="text" id="lieu" name="lieu" th:value="${lieu}" style="margin-left: 0px;">
+                <input type="text" id="lieu" name="lieu" th:value="${lieu}" style="margin-left: 0px;" required>
             </div>
             <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>

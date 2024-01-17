@@ -1,5 +1,6 @@
 package fr.projet.declarationfrais.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ import fr.projet.declarationfrais.services.DeclarationService;
 @Controller
 public class DeclarationController {
 
+    @Autowired
+    private DeclarationRepository DeclarationRepository;
+
     private final DeclarationService declarationService;
 
     @Autowired
@@ -41,30 +45,9 @@ public class DeclarationController {
         }
 
         model.addAttribute("listeDeclarations", declarations);
-        return "listeDeclarations";
+        return "ListeDeclarations";
     }
 
-    public float calculerMontantTotal(Declaration declaration) {
-        float montantTotal = 0;
-
-        if (declaration.getMontant_transport() != null) {
-            montantTotal += declaration.getMontant_transport();
-        }
-
-        if (declaration.getMontant_hebergement() != null) {
-            montantTotal += declaration.getMontant_hebergement();
-        }
-
-        if (declaration.getRestaurationList() != null) {
-            for (Restauration restauration : declaration.getRestaurationList()) {
-                if (restauration.getMontant_resto() != null) {
-                    montantTotal += restauration.getMontant_resto();
-                }
-            }
-        }
-
-        return montantTotal;
-    }
 
     @PostMapping("/updateStatut/{id}")
     public String updateStatut(@PathVariable Long id, @RequestParam("statut") String statut) {
@@ -85,41 +68,5 @@ public class DeclarationController {
         return "redirect:" + redirectURL;
     }
 
-    public Declaration sauvegarderDeclaration(RequestContext RequestContext) {
-        String refDossier = (String) RequestContext.getFlowScope().get("refDossier");
-        String date = (String) RequestContext.getFlowScope().get("date");
-        String lieu = (String) RequestContext.getFlowScope().get("lieu");
-        String intitule = (String) RequestContext.getFlowScope().get("intitule");
-        String type_transport = (String) RequestContext.getFlowScope().get("type_transport");
-        String lieu_depart = (String) RequestContext.getFlowScope().get("lieu_depart");
-        String facture_transport = (String) RequestContext.getFlowScope().get("facture_transport");
-        String montant_transport = (String) RequestContext.getFlowScope().get("montant_transport");
-        String type_hebergement = (String) RequestContext.getFlowScope().get("type_hebergement");
-        String facture_hebergement = (String) RequestContext.getFlowScope().get("facture_hebergement");
-        String montant_hebergement = (String) RequestContext.getFlowScope().get("montant_hebergement");
-        String fraisRestoInfos = (String) RequestContext.getFlowScope().get("fraisRestoInfos");
-        String coordonneesbancaires = (String) RequestContext.getFlowScope().get("coordonneesbancaires");
-
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String connectedUserEmail = userDetails.getUsername();
-        String connectedUserId = connectedUserEmail;
-
-        Declaration declaration = new Declaration();
-        declaration.setUser(connectedUserId);
-        declaration.setStatut("en attente");
-        declaration.setRefDossier(refDossier);
-        declaration.setDate(date);
-        declaration.setLieu(lieu);
-        declaration.setIntitule(intitule);
-        declaration.setTypeTransport(type_transport);
-        declaration.setLieuDepart(lieu_depart);
-        declaration.setNom_fichier_transport(facture_transport);
-        declaration.setMontant_transport(montant_transport);
-        declaration.setType_hebergement(type_hebergement);
-        declaration.setNom_fichier_hebergement(facture_hebergement);
-        declaration.setMontant_hebergement(montant_hebergement);
-        declaration.setCoordonneesbancaires(coordonneesbancaires);
-
-        return DeclarationRepository.save(declaration);
-    }
+    
 }

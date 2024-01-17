@@ -50,7 +50,8 @@
         <form th:action="@{${flowExecutionUrl} + '&_eventId=CoordonneesBancaires'}" method="post"
             class="form-restauration" id="form-restauration">
             <select name="type_restauration" class="btn btn-restauration" id="type_restauration">
-                <option value="Aucun frais de restauration">Aucun frais de restauration: Je n'ai aucun justificatif pour des frais de
+                <option value="Aucun frais de restauration">Aucun frais de restauration: Je n'ai aucun justificatif pour
+                    des frais de
                     restauration</option>
                 <option value="Frais declares">Déclarer des frais de restauration: J'ai des factures de restaurations
                     à déclarer</option>
@@ -58,7 +59,8 @@
             <br>
 
             <div id="fichier_restauration" style="display: none; margin-top: 10px;">
-                <button type="button" class="btn-primary" onclick="ouvrirPopup()">Ajouter un frais de restauration</button>
+                <button type="button" class="btn-primary" onclick="ouvrirPopup()">Ajouter un frais de
+                    restauration</button>
             </div>
 
             <div id="liste_frais_resto" style="margin-top: 20px;">
@@ -70,6 +72,10 @@
                     <h4>Date de la restauration</h4>
                 </center>
                 <input type="date" id="date_restauration" style="margin-bottom: 10px;"><br>
+                <script>
+                    var today = new Date().toISOString().split('T')[0];
+                    document.getElementById('date_restauration').setAttribute('max', today);
+                </script>
                 <center>
                     <h4>Repas</h4>
                 </center>
@@ -89,7 +95,7 @@
                         style="margin-bottom: 20px; margin-left: 0px;"><br></center>
                 <center>
                     <button onclick="fermerPopup()" style="margin-right: 10px;">Fermer</button>
-                    <button onclick="validerRestauration()"
+                    <button onclick="validerRestauration(event)"
                         style="background-color: green; color: white;">Valider</button>
                 </center>
             </div>
@@ -117,11 +123,30 @@
                 document.getElementById("popup").style.display = "block";
             }
 
-            function validerRestauration() {
-                var dateFraisResto = document.getElementById("date_restauration").value;
-                var repasFraisResto = document.getElementById("repas").value;
-                var montantFraisResto = document.getElementById("montant_restauration").value;
-                var factureRestauration = document.getElementById("facture_restauration").value;
+            function validerRestauration(event) {
+                var typeRestauration = document.getElementById('type_restauration').value;
+
+                if (typeRestauration === 'Frais declares') {
+                    var uploadField = document.getElementById('fichier_restauration');
+                    if (uploadField.style.display === 'block') {
+                        var dateFraisResto = document.getElementById("date_restauration").value;
+                        var repasFraisResto = document.getElementById("repas").value;
+                        var montantFraisResto = parseFloat(document.getElementById("montant_restauration").value);
+                        var factureRestauration = document.getElementById("facture_restauration").value;
+
+                        if (!dateFraisResto || !repasFraisResto || isNaN(montantFraisResto) || !factureRestauration) {
+                            alert("Veuillez remplir correctement tous les champs de la popup.");
+                            event.preventDefault(); // Empêcher la soumission du formulaire
+                            return false;
+                        }
+
+                        if (montantFraisResto > 30) {
+                            alert("Le montant doit être inférieur à 30.");
+                            event.preventDefault(); // Empêcher la soumission du formulaire
+                            return false;
+                        }
+                    }
+                }
 
                 document.getElementById("popup").style.display = "none";
                 fermerPopup();
@@ -136,8 +161,6 @@
                 fraisRestoInfos.push(fraisResto);
 
                 afficherFraisRestoInfos();
-
-                console.log("Données de fraisRestoInfos :", JSON.stringify(fraisRestoInfos));
             }
 
             function fermerPopup() {

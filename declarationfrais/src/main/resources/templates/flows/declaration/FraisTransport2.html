@@ -56,16 +56,27 @@
     <div class="corps-page">
         <h3>Quel était votre lieu de départ ?</h3>
         <form th:action="@{ ${flowExecutionUrl} + '&_eventId=FraisHebergement'}" method="post">
-            <input type="radio" id="domicile" name="lieu_depart" value="Votre domicile">
+            <input type="radio" id="domicile" name="lieu_depart" value="Votre domicile" required>
             <label for="domicile">Votre domicile</label><br>
-            <input type="radio" id="etablissement" name="lieu_depart" value="Votre etablissement scolaire">
+            <input type="radio" id="etablissement" name="lieu_depart" value="Votre etablissement scolaire" required>
             <label for="etablissement">Votre établissement scolaire</label><br>
             <br>
             <h3 style="margin-left: 0px;">Téléverser la facture du transport</h3>
-            <input type="file" name="facture_transport" accept=".pdf, .jpg, .png" style="margin-left: 0px;">
+            <input type="file" name="facture_transport" accept=".pdf, .jpg, .png" style="margin-left: 0px;" required>
             <br>
             <h3 style="margin-left: 0px;">Montant de la facture</h3>
-            <input type="text" id="montant_transport" name="montant_transport" th:value="${montant_transport}" style="margin-left: 0px;">
+            <input type="text" id="montant_transport" name="montant_transport" th:value="${montant_transport}"
+                style="margin-left: 0px;" oninput="validateMontantTransport(this)" required>
+            <script>
+                function validateMontantTransport(input) {
+                    var montant = parseFloat(input.value);
+                    if (isNaN(montant) || montant >= 100) {
+                        alert("Veuillez saisir un nombre inférieur à 100 pour le montant de transport.");
+                        input.value = "";
+                    }
+                }
+            </script>
+
             <center>
                 <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>
