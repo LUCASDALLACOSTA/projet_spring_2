@@ -28,7 +28,7 @@
             <tr>
                 <th>Référence Dossier</th>
                 <th>Statut actuel</th>
-                <th>Enseignant</th>
+                <th>Email de l'enseignant</th>
                 <th>Intitulé</th>
                 <th>Date</th>
                 <th>Lieu</th>
@@ -52,7 +52,7 @@
                     <button th:text="${declaration.statut}"
                         th:class="${declaration.statut == 'Valide' ? 'valide' : (declaration.statut == 'Invalide' ? 'invalide' : 'attente')}"></button>
                 </td>
-                <td th:text="${declaration.user.lastName + ' ' + declaration.user.FirstName}"></td>
+                <td th:text="${declaration.user}"></td>
                 <td th:text="${declaration.intitule}"></td>
                 <td th:text="${#strings.substring(declaration.date, 0, 10)}"></td>
                 <td th:text="${declaration.lieu}"></td>

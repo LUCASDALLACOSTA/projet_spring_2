@@ -88,8 +88,9 @@
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
         <transition on="recapitulatif" to="Recapitulatif">
-            <evaluate expression="declarationService.sauvegarderDeclaration(flowRequestContext)" />
+           <evaluate expression="declarationController.sauvegarderDeclaration(flowRequestContext)" />
         </transition>
+
 
     </view-state>
 

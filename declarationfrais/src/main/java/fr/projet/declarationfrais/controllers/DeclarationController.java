@@ -47,26 +47,26 @@ public class DeclarationController {
         return "ListeDeclarations";
     }
 
-    public Declaration sauvegarderDeclaration(RequestContext RequestContext) {
-        String refDossier = (String) RequestContext.getFlowScope().get("refDossier");
-        String date = (String) RequestContext.getFlowScope().get("date");
-        String lieu = (String) RequestContext.getFlowScope().get("lieu");
-        String intitule = (String) RequestContext.getFlowScope().get("intitule");
-        String type_transport = (String) RequestContext.getFlowScope().get("type_transport");
-        String lieu_depart = (String) RequestContext.getFlowScope().get("lieu_depart");
-        String facture_transport = (String) RequestContext.getFlowScope().get("facture_transport");
-        String montant_transport = (String) RequestContext.getFlowScope().get("montant_transport");
-        String type_hebergement = (String) RequestContext.getFlowScope().get("type_hebergement");
-        String facture_hebergement = (String) RequestContext.getFlowScope().get("facture_hebergement");
-        String montant_hebergement = (String) RequestContext.getFlowScope().get("montant_hebergement");
-        String coordonneesbancaires = (String) RequestContext.getFlowScope().get("coordonneesbancaires");
+    public Declaration sauvegarderDeclaration(RequestContext flowRequestContext) {
+        String refDossier = (String) flowRequestContext.getFlowScope().get("refDossier");
+        String date = (String) flowRequestContext.getFlowScope().get("date");
+        String lieu = (String) flowRequestContext.getFlowScope().get("lieu");
+        String intitule = (String) flowRequestContext.getFlowScope().get("intitule");
+        String type_transport = (String) flowRequestContext.getFlowScope().get("type_transport");
+        String lieu_depart = (String) flowRequestContext.getFlowScope().get("lieu_depart");
+        String facture_transport = (String) flowRequestContext.getFlowScope().get("facture_transport");
+        String montant_transport = (String) flowRequestContext.getFlowScope().get("montant_transport");
+        String type_hebergement = (String) flowRequestContext.getFlowScope().get("type_hebergement");
+        String facture_hebergement = (String) flowRequestContext.getFlowScope().get("facture_hebergement");
+        String montant_hebergement = (String) flowRequestContext.getFlowScope().get("montant_hebergement");
+        String coordonneesbancaires = (String) flowRequestContext.getFlowScope().get("coordonneesbancaires");
 
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String connectedUserEmail = userDetails.getUsername();
         String connectedUserId = connectedUserEmail;
 
         Declaration declaration = new Declaration();
-        // declaration.setUser(connectedUserId);
+        declaration.setUser(connectedUserId);
         declaration.setStatut("en attente");
         declaration.setRefDossier(refDossier);
         declaration.setDate(date);

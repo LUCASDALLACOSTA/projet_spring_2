@@ -52,9 +52,9 @@ public class Declaration {
     @Column(name = "nom_fichier_hebergement", nullable = false)
     private String nom_fichier_hebergement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+
+    @Column(name = "user", nullable = false)
+    private String user;
 
     @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
     private List<Restauration> restaurationList;
