@@ -1,5 +1,7 @@
 package fr.projet.declarationfrais.controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -11,13 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.webflow.execution.RequestContext;
 
 import fr.projet.declarationfrais.model.Declaration;
-import fr.projet.declarationfrais.model.Restauration;
 import fr.projet.declarationfrais.repository.DeclarationRepository;
 import fr.projet.declarationfrais.services.DeclarationService;
 
@@ -41,7 +40,7 @@ public class DeclarationController {
         if (statut != null && !statut.isEmpty()) {
             declarations = declarationService.getDeclarationsByStatut(statut);
         } else {
-            declarations = declarationService.getAllDeclarations();
+            declarations = declarationService.getAllDeclarations(); 
         }
 
         model.addAttribute("listeDeclarations", declarations);
@@ -50,7 +49,7 @@ public class DeclarationController {
 
     public Declaration sauvegarderDeclaration(RequestContext RequestContext) {
         String refDossier = (String) RequestContext.getFlowScope().get("refDossier");
-        Date date = (Date) RequestContext.getFlowScope().get("date");
+        String date = (String) RequestContext.getFlowScope().get("date");
         String lieu = (String) RequestContext.getFlowScope().get("lieu");
         String intitule = (String) RequestContext.getFlowScope().get("intitule");
         String type_transport = (String) RequestContext.getFlowScope().get("type_transport");
@@ -67,7 +66,7 @@ public class DeclarationController {
         String connectedUserId = connectedUserEmail;
 
         Declaration declaration = new Declaration();
-        declaration.setUser(connectedUserId);
+        // declaration.setUser(connectedUserId);
         declaration.setStatut("en attente");
         declaration.setRefDossier(refDossier);
         declaration.setDate(date);
