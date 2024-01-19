@@ -45,6 +45,9 @@
 
     <!-- FraisHebergement -->
     <view-state id="FraisHebergement" view="flows/declaration/FraisHebergement">
+        <on-entry>
+            <evaluate expression="flowScope.fraisRestoInfos = new java.util.ArrayList()" />
+        </on-entry>
         <transition on="DetailFormation" to="DetailFormation"/>
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
@@ -63,7 +66,7 @@
         <transition on="FraisRestauration" to="FraisRestauration"/>
         <transition on="CoordonneesBancaires" to="CoordonneesBancaires">
             <set name="flowScope.type_restauration" value="flowRequestContext.getRequestParameters().type_restauration"/>
-            <set name="flowScope.fraisRestoInfos" value="flowRequestContext.getRequestParameters().fraisRestoInfos"/>
+            <set name="fraisRestoInfos" value="flowScope.fraisRestoInfos" />
         </transition>
     </view-state>
 
@@ -88,7 +91,7 @@
         <transition on="coordonneesbancaires" to="CoordonneesBancaires"/>
         <transition on="transmission" to="Transmission"/>
         <transition on="recapitulatif" to="Recapitulatif">
-           <evaluate expression="declarationController.sauvegarderDeclaration(flowRequestContext)" />
+            <evaluate expression="declarationController.sauvegarderDeclaration(flowRequestContext)" />
         </transition>
 
 

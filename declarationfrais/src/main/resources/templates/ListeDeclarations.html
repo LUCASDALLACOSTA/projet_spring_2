@@ -101,9 +101,7 @@
                             </tbody>
                         </table>
                 </td>
-                <td>
-                    <!-- <span th:text="${#numbers.formatDecimal(calculerMontantTotal(declaration), 2, 'COMMA', 'POINT')} + ' €'"></span>-->
-                </td>
+                <td th:text="${declaration.getTotalFrais()}"></td>
                 <th:block th:if="${#request.isUserInRole('ROLE_1')}">
                     <td>
                         <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">

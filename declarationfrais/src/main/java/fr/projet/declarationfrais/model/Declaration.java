@@ -58,4 +58,20 @@ public class Declaration {
 
     @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
     private List<Restauration> restaurationList;
+
+    public String getTotalFrais() {
+        double total = 0.0;
+
+        // Convertir les montants en double et les additionner
+        if (montant_transport != null && !montant_transport.isEmpty()) {
+            total += Double.parseDouble(montant_transport);
+        }
+
+        if (montant_hebergement != null && !montant_hebergement.isEmpty()) {
+            total += Double.parseDouble(montant_hebergement);
+        }
+
+        // Formater le total en tant que chaîne
+        return String.format("%.2f", total) + " €";
+    }
 }

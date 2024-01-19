@@ -52,10 +52,10 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
     }
 
     @Bean
-    public FlowExecutor flowExecutor(){
-        return getFlowExecutorBuilder (flowRegistry())
-            .addFlowExecutionListener((FlowExecutionListener) new Fel(), "*")
-            .build();
+    public FlowExecutor flowExecutor() {
+        return getFlowExecutorBuilder(flowRegistry())
+                .addFlowExecutionListener((FlowExecutionListener) new Fel(), "*")
+                .build();
     }
 
     @Bean
@@ -100,4 +100,5 @@ public class WebFlowConfig extends AbstractFlowConfiguration {
         handlerAdapter.setSaveOutputToFlashScopeOnRedirect(true);
         return handlerAdapter;
     }
+
 }
