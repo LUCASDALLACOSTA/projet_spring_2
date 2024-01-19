@@ -13,10 +13,10 @@ public class Restauration {
     private Long id;
 
     @Column(nullable = false)
-    private Date date_resto;
+    private String date_resto;
 
     @Column(nullable = false)
-    private Float montant_resto;
+    private String montant_resto;
 
     @Column(name = "repas", nullable = false)
     private String repas;

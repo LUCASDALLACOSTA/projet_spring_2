@@ -38,12 +38,6 @@ public class LoggingAspect {
                 "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un nouvel enregistrement a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
     }
 
-    @After("execution(* javax.persistence.EntityManager.remove(..))") // message indiquant qu'une donnée a été supprimée de la bdd
-    public void deleteFromAlerte() {
-        System.out.println(
-                "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un enregistrement a été supprimé de la base de données /!\\ /!\\ /!\\\u001B[0m");
-    }
-
     @After("execution(* javax.persistence.EntityManager.merge(..))") // message indiquant qu'une donnée a été modifiée dans la bdd
     public void updateAlerte() {
         System.out.println(

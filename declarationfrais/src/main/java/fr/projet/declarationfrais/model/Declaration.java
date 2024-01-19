@@ -71,6 +71,15 @@ public class Declaration {
             total += Double.parseDouble(montant_hebergement);
         }
 
+        // Ajouter le total des frais de restauration
+        if (restaurationList != null) {
+            for (Restauration restauration : restaurationList) {
+                if (restauration.getMontant_resto() != null && !restauration.getMontant_resto().isEmpty()) {
+                    total += Double.parseDouble(restauration.getMontant_resto());
+                }
+            }
+        }
+
         // Formater le total en tant que chaîne
         return String.format("%.2f", total) + " €";
     }
