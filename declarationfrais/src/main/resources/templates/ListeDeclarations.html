@@ -17,12 +17,15 @@
     </div>
     <br>
     <div>
-        <a th:href="@{'/ListeDeclarations?statut=Valide'}" class="btn btn-primary" style="background-color: green;">Valides</a>
-        <a th:href="@{'/ListeDeclarations?statut=Invalide'}" class="btn btn-danger" style="background-color: red;">Invalides</a>
-        <a th:href="@{'/ListeDeclarations?statut=En attente'}" class="btn btn-warning" style="background-color: yellow;">En attente</a>
+        <a th:href="@{'/ListeDeclarations?statut=Valide'}" class="btn btn-primary"
+            style="background-color: green;">Valides</a>
+        <a th:href="@{'/ListeDeclarations?statut=Invalide'}" class="btn btn-danger"
+            style="background-color: red;">Invalides</a>
+        <a th:href="@{'/ListeDeclarations?statut=En attente'}" class="btn btn-warning"
+            style="background-color: yellow;">En attente</a>
         <a th:href="@{'/ListeDeclarations'}" class="btn btn-primary">Toutes les déclarations</a>
     </div>
-    
+
     <table border="1">
         <thead>
             <tr>
@@ -42,7 +45,9 @@
                 <th>Coordonnées Bancaires</th>
                 <th>Restaurations</th>
                 <th>Montant Total</th>
-                <th>Nouveau statut</th>
+                <th:block th:if="${#request.isUserInRole('ROLE_1')}">
+                    <th>Nouveau statut</th>
+                </th:block>
             </tr>
         </thead>
         <tbody>
@@ -58,11 +63,19 @@
                 <td th:text="${declaration.lieu}"></td>
                 <td th:text="${declaration.typeTransport}"></td>
                 <td th:text="${declaration.lieuDepart}"></td>
-                <td th:text="${declaration.montant_transport} + ' €'"></td>
+                <td th:text="${declaration.montant_transport}"></td>
                 <td th:text="${declaration.nom_fichier_transport}"></td>
                 <td th:text="${declaration.type_hebergement}"></td>
-                <td th:text="${declaration.montant_hebergement} + ' €'"></td>
-                <td th:text="${declaration.nom_fichier_hebergement}"></td>
+                <td>
+                    <span th:if="${#strings.isEmpty(declaration.montant_hebergement)}">Aucun frais d'hébergement</span>
+                    <span th:unless="${#strings.isEmpty(declaration.montant_hebergement)}"
+                        th:text="${declaration.montant_hebergement}"></span>
+                </td>
+                <td>
+                    <span th:if="${#strings.isEmpty(declaration.nom_fichier_hebergement)}">Aucun frais d'hébergement</span>
+                    <span th:unless="${#strings.isEmpty(declaration.nom_fichier_hebergement)}"
+                        th:text="${declaration.nom_fichier_hebergement}"></span>
+                </td>
                 <td th:text="${declaration.coordonneesbancaires}"></td>
                 <td>
                     <div th:if="${#lists.isEmpty(declaration.restaurationList)}">
@@ -91,20 +104,22 @@
                 <td>
                     <!-- <span th:text="${#numbers.formatDecimal(calculerMontantTotal(declaration), 2, 'COMMA', 'POINT')} + ' €'"></span>-->
                 </td>
-                <td>
-                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
-                        <button type="submit" style="background-color: green; color: white;" name="statut"
-                            value="Valide">Valide</button>
-                    </form>
-                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
-                        <button type="submit" style="background-color: red; color: white;" name="statut"
-                            value="Invalide">Invalide</button>
-                    </form>
-                    <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
-                        <button type="submit" style="background-color: yellow;" name="statut" value="En attente">En
-                            attente</button>
-                    </form>
-                </td>
+                <th:block th:if="${#request.isUserInRole('ROLE_1')}">
+                    <td>
+                        <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                            <button type="submit" style="background-color: green; color: white;" name="statut"
+                                value="Valide">Valide</button>
+                        </form>
+                        <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                            <button type="submit" style="background-color: red; color: white;" name="statut"
+                                value="Invalide">Invalide</button>
+                        </form>
+                        <form th:action="@{'/updateStatut/' + ${declaration.id}}" method="post">
+                            <button type="submit" style="background-color: yellow;" name="statut" value="En attente">En
+                                attente</button>
+                        </form>
+                    </td>
+                </th:block>
             </tr>
         </tbody>
     </table>
@@ -116,13 +131,13 @@
     var invalideBtn = document.getElementById("invalideBtn");
     var attenteBtn = document.getElementById("attenteBtn");
 
-    valideBtn.addEventListener("click", function() {
+    valideBtn.addEventListener("click", function () {
         filterDeclarations("Valide");
     });
-    invalideBtn.addEventListener("click", function() {
+    invalideBtn.addEventListener("click", function () {
         filterDeclarations("Invalide");
     });
-    attenteBtn.addEventListener("click", function() {
+    attenteBtn.addEventListener("click", function () {
         filterDeclarations("En attente");
     });
 

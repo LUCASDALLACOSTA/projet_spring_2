@@ -27,10 +27,6 @@ public class DeclarationService {
         return declarationRepository.findAll();
     }
 
-    public Declaration getDeclarationById(Long id) {
-        return declarationRepository.findById(id).orElse(null);
-    }
-
     public List<Declaration> getDeclarationsByStatut(String statut) {
         List<Declaration> allDeclarations = declarationRepository.findAll();
 
@@ -43,4 +39,28 @@ public class DeclarationService {
 
         return declarationsByStatut;
     }
+
+    public Declaration getDeclarationsById(Long id) {
+        return declarationRepository.findById(id).orElse(null);
+    }
+
+    public List<Declaration> getAllDeclarationsByConnectedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String connectedUserId = userDetails.getUsername();
+        return declarationRepository.findByUser(connectedUserId);
+    }
+
+    public List<Declaration> getDeclarationsByStatutAndUserId(String statut, String userId) {
+        List<Declaration> allDeclarations = declarationRepository.findByUser(userId);
+    
+        List<Declaration> declarationsByStatut = new ArrayList<>();
+        for (Declaration declaration : allDeclarations) {
+            if (declaration.getStatut().equalsIgnoreCase(statut)) {
+                declarationsByStatut.add(declaration);
+            }
+        }
+    
+        return declarationsByStatut;
+    }
+    
 }

@@ -2,10 +2,12 @@ package fr.projet.declarationfrais.controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -31,20 +33,6 @@ public class DeclarationController {
     @Autowired
     public DeclarationController(DeclarationService declarationService) {
         this.declarationService = declarationService;
-    }
-
-    @GetMapping("/ListeDeclarations")
-    public String getListeDeclarations(@RequestParam(value = "statut", required = false) String statut, Model model) {
-        List<Declaration> declarations;
-
-        if (statut != null && !statut.isEmpty()) {
-            declarations = declarationService.getDeclarationsByStatut(statut);
-        } else {
-            declarations = declarationService.getAllDeclarations(); 
-        }
-
-        model.addAttribute("listeDeclarations", declarations);
-        return "ListeDeclarations";
     }
 
     public Declaration sauvegarderDeclaration(RequestContext flowRequestContext) {
@@ -84,9 +72,40 @@ public class DeclarationController {
         return DeclarationRepository.save(declaration);
     }
 
+    @GetMapping("/ListeDeclarations")
+    public String getListeDeclarations(@RequestParam(value = "statut", required = false) String statut, Model model) {
+
+        List<Declaration> declarations = new ArrayList<>();
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_1"))) {
+            if (statut != null && !statut.isEmpty()) {
+                declarations = declarationService.getDeclarationsByStatut(statut);
+            } else {
+                declarations = declarationService.getAllDeclarations();
+            }
+        }
+
+        if (auth.getAuthorities().stream().anyMatch(role -> role.getAuthority().equals("ROLE_0"))) {
+            if (statut != null && !statut.isEmpty()) {
+                UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                        .getPrincipal();
+                String connectedUserId = userDetails.getUsername();
+                declarations = declarationService.getDeclarationsByStatutAndUserId(statut, connectedUserId);
+            } else {
+                declarations = declarationService.getAllDeclarationsByConnectedUser();
+            }
+        }
+
+        model.addAttribute("listeDeclarations", declarations);
+        model.addAttribute("selectedStatut", statut);
+        return "ListeDeclarations";
+    }
+
     @PostMapping("/updateStatut/{id}")
     public String updateStatut(@PathVariable Long id, @RequestParam("statut") String statut) {
-        Declaration declaration = declarationService.getDeclarationById(id);
+        Declaration declaration = declarationService.getDeclarationsById(id);
         declaration.setStatut(statut);
         DeclarationRepository.save(declaration);
 
