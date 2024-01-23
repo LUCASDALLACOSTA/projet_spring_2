@@ -69,7 +69,7 @@ public class DeclarationController {
         declaration.setMontant_hebergement(montant_hebergement);
         declaration.setCoordonneesbancaires(coordonneesbancaires);
 
-        return DeclarationRepository.save(declaration);
+        return  DeclarationRepository.save(declaration);
     }
 
     @GetMapping("/ListeDeclarations")

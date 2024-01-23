@@ -1,8 +1,12 @@
 package fr.projet.declarationfrais.aspect;
 
+import javax.persistence.PostUpdate;
+
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
+
+import fr.projet.declarationfrais.model.Declaration;
 
 @Aspect
 @Component
@@ -11,7 +15,7 @@ public class LoggingAspect {
     @Pointcut("execution(* com.projet.declarationfrais.controller..*(..)) && !execution(* javax.persistence.EntityManager.*(..))")
     public void logPointcut() {
         // ...
-    }    
+    }
 
     @Before("logPointcut()") // message pour indiquer les méthodes appelées
     public void methodeAppelee(JoinPoint joinPoint) {
@@ -19,7 +23,7 @@ public class LoggingAspect {
                 + " ~~~~~~~~~~~~~~~~ \033[0m");
     }
 
-    @AfterReturning(pointcut = "logPointcut()", returning = "result") // message pour indiquer les méthodes réussites
+    @AfterReturning(pointcut = "logPointcut()", returning = "result") // message pour indiquer les méthodes réussies
     public void methodeReussie(JoinPoint joinPoint, Object result) {
         System.out.println("\033[32m ~~~~~~~~~~~~~~~~ Méthode " + joinPoint.getSignature().toShortString()
                 + " terminée avec succès. ~~~~~~~~~~~~~~~~ \033[0m");
@@ -32,16 +36,44 @@ public class LoggingAspect {
                 + " ~~~~~~~~~~~~~~~~ \033[0m");
     }
 
-    @After("execution(* javax.persistence.EntityManager.persist(..))") // message indiquant qu'une donnée a été ajoutée à la bdd
+    @After("execution(* javax.persistence.EntityManager.persist(..))") // message indiquant qu'une donnée a été ajoutée
+                                                                       // à la bdd
     public void insertIntoAlerte() {
         System.out.println(
                 "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un nouvel enregistrement a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
     }
 
-    @After("execution(* javax.persistence.EntityManager.merge(..))") // message indiquant qu'une donnée a été modifiée dans la bdd
-    public void updateAlerte() {
-        System.out.println(
-                "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un enregistrement a été modifié dans la base de données /!\\ /!\\ /!\\\u001B[0m");
+    private ThreadLocal<String> refDossier = new ThreadLocal<>();
+    private ThreadLocal<String> user = new ThreadLocal<>();
+
+    @Before("execution(* javax.persistence.EntityManager.merge(..)) && args(entity)")
+    public void beforeUpdate(JoinPoint joinPoint, Object entity) {
+        if (entity instanceof Declaration) {
+            Declaration updatedEntity = (Declaration) entity;
+            refDossier.set(updatedEntity.getRefDossier());
+            user.set(updatedEntity.getUser());
+        }
+    }
+
+    @After("execution(* javax.persistence.EntityManager.merge(..)) && args(entity)")
+    public void afterUpdate(JoinPoint joinPoint, Object entity) {
+        if (entity instanceof Declaration) {
+            Declaration updatedEntity = (Declaration) entity;
+            String newStatut = updatedEntity.getStatut();
+            String oldStatut = updatedEntity.getOldStatut();
+
+            System.out.println("");
+            System.out.println(
+                    "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un enregistrement a été modifié dans la base de données /!\\ /!\\ /!\\ \u001B[0m");
+            System.out.println("\u001B[35m Reférence de la déclaration: \u001B[0m" + refDossier.get());
+            System.out.println("\u001B[35m Email de l'user concerné: \u001B[0m" + user.get());
+            System.out.println("\u001B[35m Ancien statut: \u001B[0m" + oldStatut);
+            System.out.println("\u001B[35m Nouveau statut: \u001B[0m" + newStatut);
+            System.out.println("");
+
+            refDossier.remove();
+            user.remove();
+        }
     }
 
     // méthode qui envoit un message lors d'un problème dans une requête sur la bdd

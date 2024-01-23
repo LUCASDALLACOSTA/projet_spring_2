@@ -52,7 +52,6 @@ public class Declaration {
     @Column(name = "nom_fichier_hebergement", nullable = false)
     private String nom_fichier_hebergement;
 
-
     @Column(name = "user", nullable = false)
     private String user;
 
@@ -71,7 +70,6 @@ public class Declaration {
             total += Double.parseDouble(montant_hebergement);
         }
 
-        // Ajouter le total des frais de restauration
         if (restaurationList != null) {
             for (Restauration restauration : restaurationList) {
                 if (restauration.getMontant_resto() != null && !restauration.getMontant_resto().isEmpty()) {
@@ -80,7 +78,13 @@ public class Declaration {
             }
         }
 
-        // Formater le total en tant que chaîne
         return String.format("%.2f", total) + " €";
+    }
+
+    private String oldStatut;
+
+    @PreUpdate
+    public void preUpdate() {
+        oldStatut = this.statut;
     }
 }
