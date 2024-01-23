@@ -56,6 +56,7 @@ public class DeclarationController {
         Declaration declaration = new Declaration();
         declaration.setUser(connectedUserId);
         declaration.setStatut("en attente");
+        declaration.setOldStatut("en attente");
         declaration.setRefDossier(refDossier);
         declaration.setDate(date);
         declaration.setLieu(lieu);

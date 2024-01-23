@@ -78,7 +78,7 @@ public class Declaration {
             }
         }
 
-        return String.format("%.2f", total) + " €";
+        return String.format("%.2f", total);
     }
 
     private String oldStatut;

@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import fr.projet.declarationfrais.model.Declaration;
+import fr.projet.declarationfrais.model.Restauration;
 
 @Aspect
 @Component
@@ -36,11 +37,39 @@ public class LoggingAspect {
                 + " ~~~~~~~~~~~~~~~~ \033[0m");
     }
 
-    @After("execution(* javax.persistence.EntityManager.persist(..))") // message indiquant qu'une donnée a été ajoutée
-                                                                       // à la bdd
-    public void insertIntoAlerte() {
-        System.out.println(
-                "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un nouvel enregistrement a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
+    @After("execution(* javax.persistence.EntityManager.persist(..))")
+    public void insertIntoAlerte(JoinPoint joinPoint) {
+        if (joinPoint.getArgs().length > 0 && joinPoint.getArgs()[0] instanceof Declaration) {
+            Declaration newEntity = (Declaration) joinPoint.getArgs()[0];
+
+            System.out.println("");
+            System.out.println(
+                    "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un nouvel enregistrement a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
+
+            if (newEntity.getMontant_hebergement().isEmpty()) {
+                System.out.println("\u001B[35m Aucun frais d'hébergement. \u001B[0m");
+            } else {
+                System.out.println("\u001B[35m Montant Hébergement: \u001B[0m" + newEntity.getMontant_hebergement());
+            }
+
+            if (newEntity.getMontant_transport() != null) {
+                System.out.println("\u001B[35m Montant Transport: \u001B[0m" + newEntity.getMontant_transport());
+            }
+
+            if (newEntity.getRestaurationList() != null && !newEntity.getRestaurationList().isEmpty()) {
+                System.out.println("\u001B[35m Frais de Restauration: \u001B[0m");
+                for (Restauration restauration : newEntity.getRestaurationList()) {
+                    if (restauration.getMontant_resto() != null) {
+                        System.out.println("\u001B[35m   - Montant Resto: \u001B[0m" + restauration.getMontant_resto());
+                    }
+                }
+            } else {
+                System.out.println("\u001B[35m Aucun frais de restauration. \u001B[0m");
+            }
+
+            System.out.println("\u001B[35m Total des frais: \u001B[0m" + newEntity.getTotalFrais());
+            System.out.println("");
+        }
     }
 
     private ThreadLocal<String> refDossier = new ThreadLocal<>();
