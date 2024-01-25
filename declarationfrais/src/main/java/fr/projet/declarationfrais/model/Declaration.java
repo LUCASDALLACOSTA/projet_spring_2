@@ -56,7 +56,7 @@ public class Declaration {
     private String user;
 
     @OneToMany(mappedBy = "declaration", cascade = CascadeType.ALL)
-    private List<Restauration> restaurationList;
+    private List<Restauration> fraisRestoInfos;
 
     public String getTotalFrais() {
         double total = 0.0;
@@ -70,8 +70,8 @@ public class Declaration {
             total += Double.parseDouble(montant_hebergement);
         }
 
-        if (restaurationList != null) {
-            for (Restauration restauration : restaurationList) {
+        if (fraisRestoInfos != null) {
+            for (Restauration restauration : fraisRestoInfos) {
                 if (restauration.getMontant_resto() != null && !restauration.getMontant_resto().isEmpty()) {
                     total += Double.parseDouble(restauration.getMontant_resto());
                 }

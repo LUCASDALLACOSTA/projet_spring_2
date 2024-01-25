@@ -13,9 +13,6 @@ public class Restauration {
     private Long id;
 
     @Column(nullable = false)
-    private String date_resto;
-
-    @Column(nullable = false)
     private String montant_resto;
 
     @Column(name = "repas", nullable = false)

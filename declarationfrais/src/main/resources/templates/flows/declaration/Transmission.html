@@ -2,104 +2,115 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Transmission</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/includes/styles.css" rel="stylesheet">
+        <title>Transmission</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/includes/styles.css" rel="stylesheet">
 </head>
 
 <body>
-    <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
-        <br>
-        <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>
-        <h4>Ref Dossier: <span th:text="${refDossier}"></span></h4>
-        <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
-        <br>
-    </div>
-    <div class="menu-container">
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de la
-                formation</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de
-                transport</a>
+        <div style="background-color: rgb(190, 190, 190); top: 0px; width: 100%;">
+                <br>
+                <h1 style="margin-left: 30px;">Votre déclaration de frais annexes</h1>
+                <h4>Ref Dossier: <span th:text="${refDossier}"></span></h4>
+                <a th:href="@{ 'MenuApplication'}" class="btn btn-primary return-button">Revenir au menu</a>
+                <br>
         </div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
-                d'hébergement</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais de
-                restauration</a></div>
-        <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5: Coordonnées
-                bancaires</a></div>
-        <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6: Transmission</a>
+        <div class="menu-container">
+                <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=detailformation'}">1: Détail de
+                                la
+                                formation</a></div>
+                <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraistransport'}">2: Frais de
+                                transport</a>
+                </div>
+                <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraishebergement'}">3: Frais
+                                d'hébergement</a></div>
+                <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=fraisrestauration'}">4: Frais
+                                de
+                                restauration</a></div>
+                <div class="circle-fini"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=coordonneesbancaires'}">5:
+                                Coordonnées
+                                bancaires</a></div>
+                <div class="circle-actuel"><a th:href="@{ ${flowExecutionUrl} + '&_eventId=transmission'}">6:
+                                Transmission</a>
+                </div>
+                <div class="circle">
+                        <p>7: Récapitulatif</p>
+                </div>
         </div>
-        <div class="circle">
-            <p>7: Récapitulatif</p>
+        <hr class="hr-menu-flow" style="width: 1630px;">
+        </nav>
+        <div class="corps-page">
+                <div>
+                        <br>
+                        <center>
+                                <h2 style="margin-top:20px;">Récapitulatif avant la transmission</h2>
+                        </center>
+                        <br>
+                        <hr>
+                </div>
+                <h3>Détails de la formation</h3>
+                <br>
+                <h4 style=" margin-left: 130px;">Intitulé: <span style="color: rgb(75, 117, 255);"
+                                th:text="${intitule}"></span>
+                </h4>
+                <h4 style=" margin-left: 130px;">Date: <span style="color: rgb(75, 117, 255);" th:text="${date}"></span>
+                </h4>
+                <h4 style=" margin-left: 130px;">Lieu: <span style="color: rgb(75, 117, 255);" th:text="${lieu}"></span>
+                </h4>
+                <br>
+                <hr>
+
+                <h3>Transport</h3>
+                <br>
+                <h4 style=" margin-left: 130px;">Type de transport utilisé: <span style="color: rgb(75, 117, 255);"
+                                th:text="${type_transport}"></span></h4>
+                <h4 style=" margin-left: 130px;">Lieu de départ: <span style="color: rgb(75, 117, 255);"
+                                th:text="${lieu_depart}"></span></h4>
+                <h4 style=" margin-left: 130px;">Facture fournis pour le transport: <span
+                                style="color: rgb(75, 117, 255);" th:text="${facture_transport}"></span></h4>
+                <h4 style=" margin-left: 130px;">Montant: <span style="color: rgb(75, 117, 255);"
+                                th:text="${montant_transport}"></span></h4>
+                <br>
+                <hr>
+
+                <h3>Hébergement</h3>
+                <br>
+                <h4 style=" margin-left: 130px;">Type d'hébergement utilisé: <span style="color: rgb(75, 117, 255);"
+                                th:text="${type_hebergement}"></span></h4>
+                <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Facture fournis
+                        pour
+                        l'hébergement: <span style="color: rgb(75, 117, 255);" th:text="${facture_hebergement}"></span>
+                </h4>
+                <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Montant: <span
+                                style="color: rgb(75, 117, 255);" th:text="${montant_hebergement}"></span></h4>
+                <br>
+                <hr>
+
+                <h3>Restauration</h3>
+                <br>
+                <h4 style=" margin-left: 130px;">Frais de restauration: <span style="color: rgb(75, 117, 255);"
+                                th:text="${type_restauration}"></span></h4>
+                <h4 style=" margin-left: 130px;" th:if="${type_restauration == 'Frais declares'}">Facture(s) fournis
+                        pour la
+                        restauration: <span style="color: rgb(75, 117, 255);" th:text="${fraisRestoInfos}"></span></h4>
+                <br>
+                <hr>
+
+                <h3>Coordonnées bancaires</h3>
+                <br>
+                <h4 style=" margin-left: 130px;">Coordonnées bancaires fournis: <span style="color: rgb(75, 117, 255);"
+                                th:text="${coordonneesbancaires}"></span></h4>
+                <br>
+                <hr>
+                <center style="margin-top: -80px; margin-bottom: 40px;">
+                        <form th:action="@{${flowExecutionUrl} + '&_eventId=recapitulatif'}" method="post">
+                                <button type="submit" class="btn btn-success success-button">Confirmer et transmettre
+                                        votre
+                                        déclaration</button>
+                        </form>
+                </center>
         </div>
-    </div>
-    <hr class="hr-menu-flow" style="width: 1630px;">
-    </nav>
-    <div class="corps-page">
-        <div>
-            <br>
-            <center>
-                <h2 style="margin-top:20px;">Récapitulatif avant la transmission</h2>
-            </center>
-            <br>
-            <hr>
-        </div>
-        <h3>Détails de la formation</h3>
         <br>
-        <h4 style=" margin-left: 130px;">Intitulé: <span style="color: rgb(75, 117, 255);" th:text="${intitule}"></span>
-        </h4>
-        <h4 style=" margin-left: 130px;">Date: <span style="color: rgb(75, 117, 255);" th:text="${date}"></span></h4>
-        <h4 style=" margin-left: 130px;">Lieu: <span style="color: rgb(75, 117, 255);" th:text="${lieu}"></span></h4>
-        <br>
-        <hr>
-
-        <h3>Transport</h3>
-        <br>
-        <h4 style=" margin-left: 130px;">Type de transport utilisé: <span style="color: rgb(75, 117, 255);"
-                th:text="${type_transport}"></span></h4>
-        <h4 style=" margin-left: 130px;">Lieu de départ: <span style="color: rgb(75, 117, 255);"
-                th:text="${lieu_depart}"></span></h4>
-        <h4 style=" margin-left: 130px;">Facture fournis pour le transport: <span style="color: rgb(75, 117, 255);"
-                th:text="${facture_transport}"></span></h4>
-        <h4 style=" margin-left: 130px;">Montant: <span style="color: rgb(75, 117, 255);"
-                th:text="${montant_transport}"></span></h4>
-        <br>
-        <hr>
-
-        <h3>Hébergement</h3>
-        <br>
-        <h4 style=" margin-left: 130px;">Type d'hébergement utilisé: <span style="color: rgb(75, 117, 255);"
-                th:text="${type_hebergement}"></span></h4>
-        <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Facture fournis pour
-            l'hébergement: <span style="color: rgb(75, 117, 255);" th:text="${facture_hebergement}"></span></h4>
-        <h4 style=" margin-left: 130px;" th:if="${type_hebergement == 'Hebergement payant'}">Montant: <span
-                style="color: rgb(75, 117, 255);" th:text="${montant_hebergement}"></span></h4>
-        <br>
-        <hr>
-
-        <h3>Restauration</h3>
-        <br>
-        <h4 style=" margin-left: 130px;">Frais de restauration: <span style="color: rgb(75, 117, 255);"
-                th:text="${type_restauration}"></span></h4>
-        <h4 style=" margin-left: 130px;" th:if="${type_restauration == 'Frais declares'}">Facture(s) fournis pour la
-            restauration: <span style="color: rgb(75, 117, 255);" th:text="${fraisRestoInfos}"></span></h4>
-        <br>
-        <hr>
-
-        <h3>Coordonnées bancaires</h3>
-        <br>
-        <h4 style=" margin-left: 130px;">Coordonnées bancaires fournis: <span style="color: rgb(75, 117, 255);"
-                th:text="${coordonneesbancaires}"></span></h4>
-        <br>
-        <hr>
-        <center style="margin-top: -80px; margin-bottom: 40px;">
-            <form th:action="@{${flowExecutionUrl} + '&_eventId=recapitulatif'}" method="post">
-                <button type="submit" class="btn btn-success success-button">Confirmer et transmettre votre
-                    déclaration</button>
-            </form>
-        </center>
-    </div>
-    <br>
 </body>
 
 </html>

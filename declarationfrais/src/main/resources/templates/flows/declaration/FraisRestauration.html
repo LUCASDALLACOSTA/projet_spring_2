@@ -69,20 +69,12 @@
             <div id="popup"
                 style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: lightgray; padding: 20px; border: 2px solid black; max-width: 400px;">
                 <center>
-                    <h4>Date de la restauration</h4>
-                </center>
-                <input type="date" id="date_restauration" style="margin-bottom: 10px;"><br>
-                <script>
-                    var today = new Date().toISOString().split('T')[0];
-                    document.getElementById('date_restauration').setAttribute('max', today);
-                </script>
-                <center>
                     <h4>Repas</h4>
                 </center>
                 <select id="repas" style="width: 100%; height: 50px;">
-                    <option value="petit-dejeuner">Petit-déjeuner</option>
-                    <option value="dejeuner">Déjeuner</option>
-                    <option value="diner">Dîner</option>
+                    <option value="petit-dejeuner">Petit-déjeuner du <span th:text="${date}"></span></option>
+                    <option value="dejeuner">Déjeuner du <span th:text="${date}"></span></option>
+                    <option value="diner">Dîner du <span th:text="${date}"></span></option>
                 </select><br><br>
                 <center>
                     <h4>Montant de la restauration</h4>
@@ -129,20 +121,19 @@
                 if (typeRestauration === 'Frais declares') {
                     var uploadField = document.getElementById('fichier_restauration');
                     if (uploadField.style.display === 'block') {
-                        var dateFraisResto = document.getElementById("date_restauration").value;
                         var repasFraisResto = document.getElementById("repas").value;
                         var montantFraisResto = parseFloat(document.getElementById("montant_restauration").value);
                         var factureRestauration = document.getElementById("facture_restauration").value;
 
-                        if (!dateFraisResto || !repasFraisResto || isNaN(montantFraisResto) || !factureRestauration) {
+                        if (!repasFraisResto || isNaN(montantFraisResto) || !factureRestauration) {
                             alert("Veuillez remplir correctement tous les champs de la popup.");
-                            event.preventDefault(); // Empêcher la soumission du formulaire
+                            event.preventDefault();
                             return false;
                         }
 
                         if (montantFraisResto > 30) {
                             alert("Le montant doit être inférieur à 30.");
-                            event.preventDefault(); // Empêcher la soumission du formulaire
+                            event.preventDefault();
                             return false;
                         }
                     }
@@ -152,7 +143,6 @@
                 fermerPopup();
 
                 const fraisResto = {
-                    date: dateFraisResto,
                     repas: repasFraisResto,
                     montant: montantFraisResto,
                     facture: factureRestauration
@@ -178,7 +168,6 @@
                 fraisRestoInfos.forEach((fraisResto, index) => {
                     const divFraisResto = document.createElement("div");
                     divFraisResto.innerHTML = `
-                <h5>Date du frais: ${fraisResto.date}</h5>
                 <h5>Repas: ${fraisResto.repas}</h5>
                 <h5>Montant: ${fraisResto.montant}</h5>
                 <h5>Facture: ${fraisResto.facture}</h5>

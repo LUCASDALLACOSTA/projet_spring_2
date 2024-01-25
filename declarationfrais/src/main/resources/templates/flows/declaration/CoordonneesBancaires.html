@@ -38,12 +38,14 @@
         </div>
         <hr class="hr-menu-flow">
         </nav>
+        <script>
+                console.log("Données de fraisRestoInfos :", JSON.stringify(fraisRestoInfos));
+        </script>
         <h2>Coordonnées bancaires</h2>
         <div>
                 <p>Type de restauration choisi : <span th:text="${type_restauration}"></span></p>
                 <p>Frais resto: </p>
                 <div>
-                        <h3>Informations sur les frais de restauration :</h3>
                         <div th:each="fraisResto : ${fraisRestoInfos}">
                                 <p>Date du frais: <span th:text="${fraisResto.date}"></span></p>
                                 <p>Repas: <span th:text="${fraisResto.repas}"></span></p>
@@ -52,6 +54,8 @@
                                 <hr>
                         </div>
                 </div>
+                <p>Repas de restauration choisi : <span th:text="${repas}"></span></p>
+                <p>Montant de restauration choisi : <span th:text="${fraisResto}"></span></p>
         </div>
 
         </div>

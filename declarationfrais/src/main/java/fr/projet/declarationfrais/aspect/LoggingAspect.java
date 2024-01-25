@@ -56,9 +56,9 @@ public class LoggingAspect {
                 System.out.println("\u001B[35m Montant Transport: \u001B[0m" + newEntity.getMontant_transport());
             }
 
-            if (newEntity.getRestaurationList() != null && !newEntity.getRestaurationList().isEmpty()) {
+            if (newEntity.getFraisRestoInfos() != null && !newEntity.getFraisRestoInfos().isEmpty()) {
                 System.out.println("\u001B[35m Frais de Restauration: \u001B[0m");
-                for (Restauration restauration : newEntity.getRestaurationList()) {
+                for (Restauration restauration : newEntity.getFraisRestoInfos()) {
                     if (restauration.getMontant_resto() != null) {
                         System.out.println("\u001B[35m   - Montant Resto: \u001B[0m" + restauration.getMontant_resto());
                     }

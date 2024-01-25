@@ -60,13 +60,16 @@
 
     <!-- FraisRestauration -->
     <view-state id="FraisRestauration" view="flows/declaration/FraisRestauration">
+        <on-entry>
+            <evaluate expression="flowScope.fraisRestoInfos = new java.util.ArrayList()" />
+        </on-entry>
         <transition on="DetailFormation" to="DetailFormation"/>
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
         <transition on="FraisRestauration" to="FraisRestauration"/>
         <transition on="CoordonneesBancaires" to="CoordonneesBancaires">
             <set name="flowScope.type_restauration" value="flowRequestContext.getRequestParameters().type_restauration"/>
-            <set name="fraisRestoInfos" value="flowScope.fraisRestoInfos" />
+            <set name="flowScope.fraisRestoInfos" value="flowRequestContext.getRequestParameters().fraisRestoInfos" />
         </transition>
     </view-state>
 

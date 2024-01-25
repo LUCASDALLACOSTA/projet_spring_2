@@ -78,22 +78,20 @@
                 </td>
                 <td th:text="${declaration.coordonneesbancaires}"></td>
                 <td>
-                    <div th:if="${#lists.isEmpty(declaration.restaurationList)}">
+                    <div th:if="${#lists.isEmpty(declaration.fraisRestoInfos)}">
                         Aucun frais de restauration
                     </div>
-                    <div th:unless="${#lists.isEmpty(declaration.restaurationList)}">
+                    <div th:unless="${#lists.isEmpty(declaration.fraisRestoInfos)}">
                         <table border="1">
                             <thead>
                                 <tr>
-                                    <th>Date Resto</th>
                                     <th>Repas</th>
                                     <th>Montant Resto</th>
                                     <th>Nom Fichier Resto</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="restauration : ${declaration.restaurationList}">
-                                    <td th:text="${#strings.substring(restauration.date_resto, 0, 10)}"></td>
+                                <tr th:each="restauration : ${declaration.fraisRestoInfos}">
                                     <td th:text="${restauration.repas}"></td>
                                     <td th:text="${restauration.montant_resto}  + ' €'"></td>
                                     <td th:text="${restauration.nom_fichier_resto}"></td>
