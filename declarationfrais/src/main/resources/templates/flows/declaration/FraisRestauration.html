@@ -57,13 +57,9 @@
                     à déclarer</option>
             </select>
             <br>
-
             <div id="fichier_restauration" style="display: none; margin-top: 10px;">
                 <button type="button" class="btn-primary" onclick="ouvrirPopup()">Ajouter un frais de
                     restauration</button>
-            </div>
-
-            <div id="liste_frais_resto" style="margin-top: 20px;">
             </div>
 
             <div id="popup"
@@ -71,27 +67,70 @@
                 <center>
                     <h4>Repas</h4>
                 </center>
-                <select id="repas" style="width: 100%; height: 50px;">
+                <select id="repas" style="width: 100%; height: 50px;" onchange="choixRepas(this.value)">
+                    <option disabled selected value="">Choisir le repas concerné</option>
                     <option value="petit-dejeuner">Petit-déjeuner du <span th:text="${date}"></span></option>
                     <option value="dejeuner">Déjeuner du <span th:text="${date}"></span></option>
                     <option value="diner">Dîner du <span th:text="${date}"></span></option>
                 </select><br><br>
-                <center>
-                    <h4>Montant de la restauration</h4>
-                </center>
-                <input type="text" id="montant_restauration" style="margin-bottom: 10px; margin-left: 0px;"><br>
-                <center>
-                    <h4>Téléverser la facture justificative</h4>
-                </center>
-                <center><input type="file" id="facture_restauration" accept=".pdf, .jpg, .png"
-                        style="margin-bottom: 20px; margin-left: 0px;"><br></center>
+
+                <!-- Montant de la restauration -->
+                <div id="montant_petit_dejeuner" style="display: none;">
+                    <center>
+                        <h4>Montant du petit-déjeuner</h4>
+                    </center>
+                    <input type="text" id="montant_petit_dejeuner" name="montant_petit_dejeuner"
+                        th:value="${montant_petit_dejeuner}" style="margin-left: 0px" required><br>
+                </div>
+                <div id="montant_dejeuner" style="display: none;">
+                    <center>
+                        <h4>Montant du dejeuner</h4>
+                    </center>
+                    <input type="text" id="montant_dejeuner" style="margin-bottom: 10px; margin-left: 0px;"><br>
+                </div>
+
+                <div id="montant_diner" style="display: none;">
+                    <center>
+                        <h4>Montant du diner</h4>
+                    </center>
+                    <input type="text" id="montant_diner" style="margin-bottom: 10px; margin-left: 0px;"><br>
+                </div>
+
+                <!-- Téléverser la facture justificative -->
+                <div id="facture_petit_dejeuner" style="display: none;">
+                    <center>
+                        <h4>Téléverser la facture justificative</h4>
+                    </center>
+                    <center>
+                        <input type="file" id="facture_petit_dejeuner" accept=".pdf, .jpg, .png"
+                            style="margin-bottom: 20px; margin-left: 0px;"><br>
+                    </center>
+                </div>
+                <div id="facture_dejeuner" style="display: none;">
+                    <center>
+                        <h4>Téléverser la facture justificative</h4>
+                    </center>
+                    <center>
+                        <input type="file" id="facture_dejeuner" accept=".pdf, .jpg, .png"
+                            style="margin-bottom: 20px; margin-left: 0px;"><br>
+                    </center>
+                </div>
+                <div id="facture_diner" style="display: none;">
+                    <center>
+                        <h4>Téléverser la facture justificative</h4>
+                    </center>
+                    <center>
+                        <input type="file" id="facture_diner" accept=".pdf, .jpg, .png"
+                            style="margin-bottom: 20px; margin-left: 0px;"><br>
+                    </center>
+                </div>
+
                 <center>
                     <button onclick="fermerPopup()" style="margin-right: 10px;">Fermer</button>
                     <button onclick="validerRestauration(event)"
                         style="background-color: green; color: white;">Valider</button>
                 </center>
             </div>
-
             <button type="submit" class="btn btn-primary etape">Etape suivante</button>
         </form>
 
@@ -105,84 +144,64 @@
                     uploadField.style.display = 'none';
                 }
             });
-        </script>
 
-        <script>
-            let fraisRestoCounter = 1;
-            const fraisRestoInfos = [];
+            function validerRestauration() {
+                document.getElementById("popup").style.display = "none";
+                fermerPopup();
+            }
+
+            function choixRepas(selectedRepas) {
+                var montant_petit_dejeuner = document.getElementById('montant_petit_dejeuner');
+                var facture_petit_dejeuner = document.getElementById('facture_petit_dejeuner');
+                var montant_dejeuner = document.getElementById('montant_dejeuner');
+                var facture_dejeuner = document.getElementById('facture_dejeuner');
+                var montant_diner = document.getElementById('montant_diner');
+                var facture_diner = document.getElementById('facture_diner');
+
+                if (selectedRepas === 'petit-dejeuner') {
+                    montant_petit_dejeuner.style.display = 'block';
+                    facture_petit_dejeuner.style.display = 'block';
+                    montant_dejeuner.style.display = 'none';
+                    facture_dejeuner.style.display = 'none';
+                    montant_diner.style.display = 'none';
+                    facture_diner.style.display = 'none';
+                } else if (selectedRepas === 'dejeuner') {
+                    montant_petit_dejeuner.style.display = 'none';
+                    facture_petit_dejeuner.style.display = 'none';
+                    montant_dejeuner.style.display = 'block';
+                    facture_dejeuner.style.display = 'block';
+                    montant_diner.style.display = 'none';
+                    facture_diner.style.display = 'none';
+                } else if (selectedRepas === 'diner') {
+                    montant_dejeuner.style.display = 'none';
+                    facture_dejeuner.style.display = 'none';
+                    montant_petit_dejeuner.style.display = 'none';
+                    facture_petit_dejeuner.style.display = 'none';
+                    montant_diner.style.display = 'block';
+                    facture_diner.style.display = 'block';
+                }
+                else {
+                    montant_petit_dejeuner.style.display = 'none';
+                    facture_petit_dejeuner.style.display = 'none';
+                    montant_dejeuner.style.display = 'none';
+                    facture_dejeuner.style.display = 'none';
+                    montant_diner.style.display = 'none';
+                    facture_diner.style.display = 'none';
+                }
+            }
+
 
             function ouvrirPopup() {
                 document.getElementById("popup").style.display = "block";
             }
 
-            function validerRestauration(event) {
-                var typeRestauration = document.getElementById('type_restauration').value;
-
-                if (typeRestauration === 'Frais declares') {
-                    var uploadField = document.getElementById('fichier_restauration');
-                    if (uploadField.style.display === 'block') {
-                        var repasFraisResto = document.getElementById("repas").value;
-                        var montantFraisResto = parseFloat(document.getElementById("montant_restauration").value);
-                        var factureRestauration = document.getElementById("facture_restauration").value;
-
-                        if (!repasFraisResto || isNaN(montantFraisResto) || !factureRestauration) {
-                            alert("Veuillez remplir correctement tous les champs de la popup.");
-                            event.preventDefault();
-                            return false;
-                        }
-
-                        if (montantFraisResto > 30) {
-                            alert("Le montant doit être inférieur à 30.");
-                            event.preventDefault();
-                            return false;
-                        }
-                    }
-                }
-
-                document.getElementById("popup").style.display = "none";
-                fermerPopup();
-
-                const fraisResto = {
-                    repas: repasFraisResto,
-                    montant: montantFraisResto,
-                    facture: factureRestauration
-                };
-
-                fraisRestoInfos.push(fraisResto);
-
-                afficherFraisRestoInfos();
-            }
-
             function fermerPopup() {
                 document.getElementById("popup").style.display = "none";
-
-                document.getElementById("form-restauration").focus();
-
-                event.preventDefault();
-            }
-
-            function afficherFraisRestoInfos() {
-                const container = document.getElementById("liste_frais_resto");
-                container.innerHTML = "";
-
-                fraisRestoInfos.forEach((fraisResto, index) => {
-                    const divFraisResto = document.createElement("div");
-                    divFraisResto.innerHTML = `
-                <h5>Repas: ${fraisResto.repas}</h5>
-                <h5>Montant: ${fraisResto.montant}</h5>
-                <h5>Facture: ${fraisResto.facture}</h5>
-                <div>
-                    <button onclick="supprimerFraisResto(${index})" style="background-color: red; color: white;">Supprimer</button>
-                </div>
-                <hr style="margin-top:10px; margin-left:0px;">
-            `;
-                    container.appendChild(divFraisResto);
-                });
+                //event.preventDefault();
             }
 
             function supprimerFraisResto(index) {
                 fraisRestoInfos.splice(index, 1);
-                afficherFraisRestoInfos();
             }
         </script>
 

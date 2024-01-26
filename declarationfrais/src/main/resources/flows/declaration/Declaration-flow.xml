@@ -60,16 +60,18 @@
 
     <!-- FraisRestauration -->
     <view-state id="FraisRestauration" view="flows/declaration/FraisRestauration">
-        <on-entry>
-            <evaluate expression="flowScope.fraisRestoInfos = new java.util.ArrayList()" />
-        </on-entry>
         <transition on="DetailFormation" to="DetailFormation"/>
         <transition on="FraisTransport" to="FraisTransport"/>
         <transition on="FraisHebergement" to="FraisHebergement"/>
         <transition on="FraisRestauration" to="FraisRestauration"/>
         <transition on="CoordonneesBancaires" to="CoordonneesBancaires">
             <set name="flowScope.type_restauration" value="flowRequestContext.getRequestParameters().type_restauration"/>
-            <set name="flowScope.fraisRestoInfos" value="flowRequestContext.getRequestParameters().fraisRestoInfos" />
+            <set name="flowScope.montant_petit_dejeuner" value="flowRequestContext.getRequestParameters().montant_petit_dejeuner" />
+            <set name="flowScope.facture_petit_dejeuner" value="flowRequestContext.getRequestParameters().facture_petit_dejeuner" />
+            <set name="flowScope.montant_dejeuner" value="flowRequestContext.getRequestParameters().montant_dejeuner" />
+            <set name="flowScope.facture_dejeuner" value="flowRequestContext.getRequestParameters().facture_dejeuner" />
+            <set name="flowScope.montant_diner" value="flowRequestContext.getRequestParameters().montant_diner" />
+            <set name="flowScope.facture_diner" value="flowRequestContext.getRequestParameters().facture_diner" />
         </transition>
     </view-state>
 
