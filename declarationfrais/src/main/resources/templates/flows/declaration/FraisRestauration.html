@@ -61,6 +61,25 @@
                 <button type="button" class="btn-primary" onclick="ouvrirPopup()">Ajouter un frais de
                     restauration</button>
             </div>
+            <br>
+            <div id="divPetitDejeuner" style="display: none;">
+                <h4>Petit-déjeuner du <span th:text="${date}"></span></h4>
+                <p>Montant du petit-déjeuner: <span th:text="${montant_petit_dejeuner}"></span></p>
+                <p>Facture du petit-déjeuner: <span th:text="${facture_petit_dejeuner}"></span></p>
+                <hr style="margin-top:10px; margin-left:0px;">
+            </div>
+            <div id="divDejeuner" style="display: none;">
+                <h4>Déjeuner du <span th:text="${date}"></span></h4>
+                <p>Montant du déjeuner: <span th:text="${montant_dejeuner}"></span></p>
+                <p>Facture du déjeuner <span th:text="${facture_dejeuner}"></span></p>
+                <hr style="margin-top:10px; margin-left:0px;">
+            </div>
+            <div id="divDiner" style="display: none;">
+                <h4>Diner du <span th:text="${date}"></span></h4>
+                <p>Montant du diner : <span th:text="${montant_diner}"></span></p>
+                <p>Facture du diner : <span th:text="${facture_diner}"></span></p>
+                <hr style="margin-top:10px; margin-left:0px;">
+            </div>
 
             <div id="popup"
                 style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: lightgray; padding: 20px; border: 2px solid black; max-width: 400px;">
@@ -69,7 +88,7 @@
                 </center>
                 <select id="repas" style="width: 100%; height: 50px;" onchange="choixRepas(this.value)">
                     <option disabled selected value="">Choisir le repas concerné</option>
-                    <option value="petit-dejeuner">Petit-déjeuner du <span th:text="${date}"></span></option>
+                    <option value="petit_dejeuner">Petit-déjeuner du <span th:text="${date}"></span></option>
                     <option value="dejeuner">Déjeuner du <span th:text="${date}"></span></option>
                     <option value="diner">Dîner du <span th:text="${date}"></span></option>
                 </select><br><br>
@@ -80,20 +99,22 @@
                         <h4>Montant du petit-déjeuner</h4>
                     </center>
                     <input type="text" id="montant_petit_dejeuner" name="montant_petit_dejeuner"
-                        th:value="${montant_petit_dejeuner}" style="margin-left: 0px" required><br>
+                        th:value="${montant_petit_dejeuner}" style="margin-left: 0px"><br>
                 </div>
                 <div id="montant_dejeuner" style="display: none;">
                     <center>
                         <h4>Montant du dejeuner</h4>
                     </center>
-                    <input type="text" id="montant_dejeuner" style="margin-bottom: 10px; margin-left: 0px;"><br>
+                    <input type="text" id="montant_dejeuner" name="montant_dejeuner"
+                        style="margin-bottom: 10px; margin-left: 0px;"><br>
                 </div>
 
                 <div id="montant_diner" style="display: none;">
                     <center>
                         <h4>Montant du diner</h4>
                     </center>
-                    <input type="text" id="montant_diner" style="margin-bottom: 10px; margin-left: 0px;"><br>
+                    <input type="text" id="montant_diner" name="montant_diner"
+                        style="margin-bottom: 10px; margin-left: 0px;"><br>
                 </div>
 
                 <!-- Téléverser la facture justificative -->
@@ -102,8 +123,8 @@
                         <h4>Téléverser la facture justificative</h4>
                     </center>
                     <center>
-                        <input type="file" id="facture_petit_dejeuner" accept=".pdf, .jpg, .png"
-                            style="margin-bottom: 20px; margin-left: 0px;"><br>
+                        <input type="file" id="facture_petit_dejeuner" name="facture_petit_dejeuner"
+                            accept=".pdf, .jpg, .png" style="margin-bottom: 20px; margin-left: 0px;"><br>
                     </center>
                 </div>
                 <div id="facture_dejeuner" style="display: none;">
@@ -111,7 +132,7 @@
                         <h4>Téléverser la facture justificative</h4>
                     </center>
                     <center>
-                        <input type="file" id="facture_dejeuner" accept=".pdf, .jpg, .png"
+                        <input type="file" id="facture_dejeuner" name="facture_dejeuner" accept=".pdf, .jpg, .png"
                             style="margin-bottom: 20px; margin-left: 0px;"><br>
                     </center>
                 </div>
@@ -120,7 +141,7 @@
                         <h4>Téléverser la facture justificative</h4>
                     </center>
                     <center>
-                        <input type="file" id="facture_diner" accept=".pdf, .jpg, .png"
+                        <input type="file" id="facture_diner" name="facture_diner" accept=".pdf, .jpg, .png"
                             style="margin-bottom: 20px; margin-left: 0px;"><br>
                     </center>
                 </div>
@@ -140,6 +161,9 @@
                 var uploadField = document.getElementById('fichier_restauration');
                 if (this.value === 'Frais declares') {
                     uploadField.style.display = 'block';
+                    divPetitDejeuner.style.display ="block";
+                    divDejeuner.style.display ="block";
+                    divDiner.style.display ="block";
                 } else {
                     uploadField.style.display = 'none';
                 }
@@ -158,7 +182,7 @@
                 var montant_diner = document.getElementById('montant_diner');
                 var facture_diner = document.getElementById('facture_diner');
 
-                if (selectedRepas === 'petit-dejeuner') {
+                if (selectedRepas === 'petit_dejeuner') {
                     montant_petit_dejeuner.style.display = 'block';
                     facture_petit_dejeuner.style.display = 'block';
                     montant_dejeuner.style.display = 'none';
@@ -197,7 +221,7 @@
 
             function fermerPopup() {
                 document.getElementById("popup").style.display = "none";
-                //event.preventDefault();
+                event.preventDefault();
             }
 
             function supprimerFraisResto(index) {

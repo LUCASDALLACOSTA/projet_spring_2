@@ -88,11 +88,33 @@
 
                 <h3>Restauration</h3>
                 <br>
-                <h4 style=" margin-left: 130px;">Frais de restauration: <span style="color: rgb(75, 117, 255);"
-                                th:text="${type_restauration}"></span></h4>
-                <h4 style=" margin-left: 130px;" th:if="${type_restauration == 'Frais declares'}">Facture(s) fournis
-                        pour la
-                        restauration: <span style="color: rgb(75, 117, 255);" th:text="${fraisRestoInfos}"></span></h4>
+                <div th:unless="${#strings.isEmpty(montant_petit_dejeuner)}">
+                        <h4 style=" margin-left: 130px;">Petit-déjeuner du <span th:text="${date}"></span></h4>
+                        <h4 style=" margin-left: 130px;">Montant du petit-déjeuner: <span
+                                        th:text="${montant_petit_dejeuner}" style="color: rgb(75, 117, 255);"></span>
+                        </h4>
+                        <h4 style=" margin-left: 130px;">Facture du petit-déjeuner: <span
+                                        th:text="${facture_petit_dejeuner}" style="color: rgb(75, 117, 255);"></span>
+                        </h4>
+                        <br>
+                </div>
+                <div th:unless="${#strings.isEmpty(montant_dejeuner)}">
+                        <h4 style=" margin-left: 130px;">Déjeuner du <span th:text="${date}"></span></h4>
+                        <h4 style=" margin-left: 130px;">Montant du déjeuner: <span th:text="${montant_dejeuner}"
+                                        style="color: rgb(75, 117, 255);"></span></h4>
+                        <h4 style=" margin-left: 130px;">Facture du déjeuner <span th:text="${facture_dejeuner}"
+                                        style="color: rgb(75, 117, 255);"></span></h4>
+                        <br>
+                </div>
+                <div th:unless="${#strings.isEmpty(montant_diner)}">
+                        <h4 style=" margin-left: 130px;">Diner du <span th:text="${date}"></span></h4>
+                        <h4 style=" margin-left: 130px;">Montant du diner : <span th:text="${montant_diner}"
+                                        style="color: rgb(75, 117, 255);"></span>
+                        </h4>
+                        <h4 style=" margin-left: 130px;">Facture du diner : <span th:text="${facture_diner}"
+                                        style="color: rgb(75, 117, 255);"></span>
+                        </h4>
+                </div>
                 <br>
                 <hr>
 

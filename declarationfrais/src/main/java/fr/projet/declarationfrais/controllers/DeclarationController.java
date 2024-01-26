@@ -70,6 +70,8 @@ public class DeclarationController {
         declaration.setMontant_hebergement(montant_hebergement);
         declaration.setCoordonneesbancaires(coordonneesbancaires);
 
+        Long declarationId = declaration.getId();
+
         return  DeclarationRepository.save(declaration);
     }
 
