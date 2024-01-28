@@ -15,7 +15,7 @@ public class RestaurationController {
 
     @Autowired
     private DeclarationRepository declarationRepository;
-
+    
     public Restauration sauvegarderRestaurationPetitDejeuner(RequestContext flowRequestContext, Long declarationId) {
         String montant_petit_dejeuner = (String) flowRequestContext.getFlowScope().get("montant_petit_dejeuner");
         String facture_petit_dejeuner = (String) flowRequestContext.getFlowScope().get("facture_petit_dejeuner");

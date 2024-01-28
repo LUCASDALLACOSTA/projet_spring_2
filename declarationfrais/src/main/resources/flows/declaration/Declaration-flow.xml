@@ -108,6 +108,9 @@
 
     <!-- Recapitulatif -->
     <view-state id="Recapitulatif" view="flows/declaration/Recapitulatif">
+    <on-entry>
+        <evaluate expression="loggingAspect.afficherTotalFrais(flowScope.declaration)" />
+    </on-entry>
     </view-state>
 
     <global-transitions>

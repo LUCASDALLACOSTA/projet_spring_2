@@ -1,10 +1,14 @@
 package fr.projet.declarationfrais.aspect;
 
+import java.util.List;
+
 import javax.persistence.PostUpdate;
 
 import org.aspectj.lang.*;
 import org.aspectj.lang.annotation.*;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.projet.declarationfrais.model.Declaration;
 import fr.projet.declarationfrais.model.Restauration;
@@ -37,14 +41,14 @@ public class LoggingAspect {
                 + " ~~~~~~~~~~~~~~~~ \033[0m");
     }
 
-    @After("execution(* javax.persistence.EntityManager.persist(..))")
-    public void insertIntoAlerte(JoinPoint joinPoint) {
-        if (joinPoint.getArgs().length > 0 && joinPoint.getArgs()[0] instanceof Declaration) {
-            Declaration newEntity = (Declaration) joinPoint.getArgs()[0];
+    @After("execution(* fr.projet.declarationfrais.repository.DeclarationRepository.save(..))  && args(entity)")
+    public void insertDeclaration(JoinPoint joinPoint, Object entity) {
+        if (entity instanceof Declaration) {
+            Declaration newEntity = (Declaration) entity;
 
             System.out.println("");
             System.out.println(
-                    "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Un nouvel enregistrement a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
+                    "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Une nouvelle déclaration a été ajouté à la base de données  /!\\ /!\\ /!\\\u001B[0m");
 
             if (newEntity.getMontant_hebergement().isEmpty()) {
                 System.out.println("\u001B[35m Aucun frais d'hébergement. \u001B[0m");
@@ -55,21 +59,31 @@ public class LoggingAspect {
             if (newEntity.getMontant_transport() != null) {
                 System.out.println("\u001B[35m Montant Transport: \u001B[0m" + newEntity.getMontant_transport());
             }
-
-            if (newEntity.getFraisRestoInfos() != null && !newEntity.getFraisRestoInfos().isEmpty()) {
-                System.out.println("\u001B[35m Frais de Restauration: \u001B[0m");
-                for (Restauration restauration : newEntity.getFraisRestoInfos()) {
-                    if (restauration.getMontant_resto() != null) {
-                        System.out.println("\u001B[35m   - Montant Resto: \u001B[0m" + restauration.getMontant_resto());
-                    }
-                }
-            } else {
-                System.out.println("\u001B[35m Aucun frais de restauration. \u001B[0m");
-            }
-
-            System.out.println("\u001B[35m Total des frais: \u001B[0m" + newEntity.getTotalFrais());
-            System.out.println("");
         }
+    }
+
+    @After("execution(* fr.projet.declarationfrais.repository.RestaurationRepository.save(..))  && args(entity)")
+    public void insertRestauration(JoinPoint joinPoint, Object entity) {
+        if (entity instanceof Restauration) {
+            Restauration newEntity = (Restauration) entity;
+
+            if (newEntity.getMontant_resto().isEmpty()) {
+                System.out.println("\u001B[35m Aucun frais de restauration. \u001B[0m");
+            } else {
+                System.out.println("");
+                System.out.println(
+                        "\u001B[35m /!\\ /!\\ /!\\ ATTENTION BDD: Une nouvelle restauration a été ajoutée à la base de données  /!\\ /!\\ /!\\\u001B[0m");
+                System.out.println(
+                        "\u001B[35m Repas: \u001B[0m" + newEntity.getRepas() + "\u001B[35m Montant: \u001B[0m"
+                                + newEntity.getMontant_resto());
+            }
+        }
+    }
+
+    public void afficherTotalFrais(Declaration declaration) {
+        System.out.println("");
+        System.out.println("\u001B[35m Total des frais: \u001B[0m" + declaration.getTotalFrais());
+        System.out.println("");
     }
 
     private ThreadLocal<String> refDossier = new ThreadLocal<>();

@@ -89,6 +89,8 @@
 
                 <h3>Restauration</h3>
                 <br>
+                <h4 style=" margin-left: 130px;" th:if="${type_restauration == 'Aucun frais de restauration'}"><span
+                        style="color: rgb(0, 154, 13);" th:text="${type_restauration}"></span></h4>
                 <div th:unless="${#strings.isEmpty(montant_petit_dejeuner)}">
                         <h4 style=" margin-left: 130px;">Petit-déjeuner du <span th:text="${date}"></span></h4>
                         <h4 style=" margin-left: 130px;">Montant du petit-déjeuner: <span
