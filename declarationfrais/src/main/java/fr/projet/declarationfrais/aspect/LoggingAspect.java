@@ -59,6 +59,7 @@ public class LoggingAspect {
             if (newEntity.getMontant_transport() != null) {
                 System.out.println("\u001B[35m Montant Transport: \u001B[0m" + newEntity.getMontant_transport());
             }
+            
         }
     }
 
